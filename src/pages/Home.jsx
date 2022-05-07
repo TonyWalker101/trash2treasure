@@ -1,8 +1,12 @@
+import HomeHeader from "../components/layout/HomeHeader";
+import { Fragment } from "react";
+import "../stylesheet/Home.css"
+
 const Home = () => {
   return(
-    <div>
-      <h1>Home</h1>
-    </div>
+    <Fragment>
+      <HomeHeader />
+    </Fragment>
   )
 }
 
