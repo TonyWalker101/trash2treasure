@@ -15,7 +15,7 @@ img {
   margin: 0 auto;
 }
 
-nav {
+#home-header {
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -53,4 +53,34 @@ footer {
   font-size: 50px;
   color: #4D318B;
   margin-top: -50px;
+}
+
+/* --------------------- FOOTER --------------------- */
+
+#search-page-logo {
+  margin-left: 25px;
+}
+
+#search-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.header-search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px #999999;
+  width: 500px;
+  border-radius: 250px;
+  height: 50px;
+  margin-top: -55px;
+}
+
+.vl {
+  border-left: 1px solid #999999;
+  height: 35px;
+  margin: 0 10px;
 }
