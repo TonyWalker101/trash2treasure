@@ -20,7 +20,9 @@ const HomeHeader = () => {
 
           <TextField id="standard-basic" label="Search by item" variant="standard" size="small" InputProps={{ disableUnderline: true }}/>
 
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <ThemeProvider theme={theme}>
+            <Button variant="contained" disableElevation color="primary" className="search-button" sx={{ borderRadius: 8 }}><i class="fa-solid fa-magnifying-glass fa-xl"></i></Button>
+          </ThemeProvider>
         </form>
     </header>
     
