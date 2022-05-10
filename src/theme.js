@@ -5,7 +5,8 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#87cdd1",
-      dark: "#69C3D1"
+      dark: "#69C3D1", 
+      light: "#FFFFFF"
     }, 
     secondary: {
       main: "#f4e63f", 
@@ -20,7 +21,10 @@ const theme = createTheme({
     fontWeightRegular: 400, 
     fontWeightBold: 600, 
     allVariants: {
-      color: "grey"
+      color: "#2d2d2d"
+    }, 
+    button: {
+      fontWeight: "bold"
     }
   }
 });
