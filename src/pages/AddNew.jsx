@@ -1,7 +1,10 @@
+import HomeHeader from "../components/layout/HomeHeader";
+import SearchHeader from "../components/layout/SearchHeader";
+
 const AddNew = () => {
   return(
     <div>
-      <h1>Add A Treasure</h1>
+      <SearchHeader />
     </div>
   )
 }

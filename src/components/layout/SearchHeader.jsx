@@ -15,12 +15,13 @@ const HomeHeader = () => {
       </nav>
         
         <form class="header-search-bar">
-          <TextField id="standard-basic" label="Search by location" variant="standard" size="small" InputProps={{ disableUnderline: true }}/>
+          <ThemeProvider theme={theme}>
+          
+          <TextField id="filled-basic" label="Search by location" variant="filled" size="small"   InputProps={{ disableUnderline: true}}/>
           <div class="vl"></div>
 
-          <TextField id="standard-basic" label="Search by item" variant="standard" size="small" InputProps={{ disableUnderline: true }}/>
+          <TextField id="filled-basic" label="Search by item" variant="filled" size="small" InputProps={{ disableUnderline: true }}/>
 
-          <ThemeProvider theme={theme}>
             <Button variant="contained" disableElevation color="primary" className="search-button" sx={{ borderRadius: 8 }}><i class="fa-solid fa-magnifying-glass fa-xl"></i></Button>
           </ThemeProvider>
         </form>
