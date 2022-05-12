@@ -1,0 +1,31 @@
+.add-new-container {
+  display: inline;
+  align-items: center;
+  background-color: aqua;
+}
+
+.form-container {
+  width: 50vw;
+  height: 91vh; 
+  position: absolute;
+  top: 86px;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#add-new-title {
+  text-align: center;
+}
+
+/* --------------------- FORM --------------------- */
+
+#add-new-form {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 70%;
+}

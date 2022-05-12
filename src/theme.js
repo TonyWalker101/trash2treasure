@@ -25,6 +25,18 @@ const theme = createTheme({
     }, 
     button: {
       fontWeight: "bold"
+    }, 
+    title: {
+      color: "#4D318B", 
+      fontWeight: "bold", 
+      fontFamily: ['Poppins', 'sans-serif'].join(","), 
+      fontSize: 40
+    }, 
+    helper: {
+      color: "#4a4a4a", 
+      fontWeight: "regular", 
+      fontFamily: ['Poppins', 'sans-serif'].join(","), 
+      fontSize: 14
     }
   }
 });
