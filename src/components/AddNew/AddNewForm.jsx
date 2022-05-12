@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme';
-import { Typography, TextField, FormControl, InputLabel, Select, MenuItem, Button, Input, Lable} from '@mui/material';
+import { Typography, TextField, FormControl, InputLabel, Select, MenuItem, Button} from '@mui/material';
+import { useState } from 'react';
 
 const AddNewForm = () => {
   return(
@@ -19,11 +20,10 @@ const AddNewForm = () => {
               id="demo-simple-select"
               label="Condition"
               >
-              <MenuItem value={"nNewew"}>New</MenuItem>
               <MenuItem value={"Like New"}>Like New</MenuItem>
               <MenuItem value={"Good"}>Good</MenuItem>
               <MenuItem value={"Acceptable"}>Acceptable</MenuItem>
-              <MenuItem value={"Not Working "}>Not Working</MenuItem>
+              <MenuItem value={"Broken"}>Broken</MenuItem>
             </Select>
           </FormControl>
           
@@ -34,13 +34,12 @@ const AddNewForm = () => {
             minRows={4}
             />
 
-{/* upload image button */}
-<>
-<input accept="image/*" type="file" id="select-image" style={{ display: 'none' }}/>
-<label htmlFor="select-image">
-<Button variant="contained" component="span" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary">Upload An Image</Button>
-</label></>
-<Typography variant="helper" sx={{mt: -5}}>Please upload jpep, jpg or png </Typography>
+          <>
+          <input accept="image/*" type="file" id="select-image" style={{ display: 'none' }}/>
+          <label htmlFor="select-image">
+          <Button variant="contained" component="span" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary">Upload An Image</Button>
+          </label></>
+          <Typography variant="helper" sx={{mt: -5}}>Please upload a jpep, jpg or png file</Typography>
 
 
           <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" sx={{mt: 5, width: "100%"}} >Submit</Button>

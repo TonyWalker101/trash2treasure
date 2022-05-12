@@ -42,7 +42,7 @@ const AddNewMap = () => {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={13}
+        zoom={5}
         onLoad={onLoad}
         onUnmount={onUnmount}
         options={options}
