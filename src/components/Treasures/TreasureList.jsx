@@ -1,4 +1,22 @@
 import Treasure from "./Treasure";
+import axios from "axios";
+import { useState } from "react";
+
+// const [state, setState] = useState({})
+
+const treasures = {
+  id: null,
+  user_id: null,
+  treasure_name: null,
+  location: null,
+  description: null,
+  condition: null,
+  image: null
+}
+
+Promise.all([
+  axios.get("http://localhost:3001/")
+]).then((e) => console.log("Test worked!"));
 
 function TreasureList() {
 
