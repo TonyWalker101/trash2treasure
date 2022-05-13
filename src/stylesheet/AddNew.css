@@ -1,7 +1,6 @@
 .add-new-container {
   display: inline;
   align-items: center;
-  background-color: aqua;
 }
 
 .form-container {
@@ -28,4 +27,18 @@
   flex-direction: column;
   justify-content: space-between;
   height: 70%;
+}
+
+#address-button {
+  border: none;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+}
+
+#address-button {
+  position: absolute;
+  margin-top: 15px;
+  margin-left: -40px;
+
 }

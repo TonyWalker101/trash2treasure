@@ -3,7 +3,7 @@ import theme from '../../theme';
 import { Typography, TextField, FormControl, InputLabel, Select, MenuItem, Button} from '@mui/material';
 import { useState } from 'react';
 
-const AddNewForm = () => {
+const AddNewForm = (props) => {
   return(
     <div className="form-container">
       <ThemeProvider theme={theme}>
@@ -11,8 +11,12 @@ const AddNewForm = () => {
 
         <form id="add-new-form">
           <TextField id="outlined-basic" label="Title" variant="outlined" />
-          <TextField id="outlined-basic" label="Location" variant="outlined" />
-          
+          <div className='search-container'>
+            <TextField id="outlined-basic" label="Location" variant="outlined" sx={{width: "100%"}}/>
+            <button id="address-button" ><i class="fa-solid fa-magnifying-glass fa-xl"></i></button>
+            <Typography variant="helper" sx={{mt: -5}}>Please input an address <b>OR</b> adjust the pin on the map to generate a location</Typography>
+          </div>
+
           <FormControl sx={{width: "200px"}}>
             <InputLabel id="demo-simple-select-label">Condition</InputLabel>
             <Select

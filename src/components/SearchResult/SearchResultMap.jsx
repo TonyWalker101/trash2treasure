@@ -12,7 +12,7 @@ const center = {
   lng: -79.3832
 };
 
-const AddNewMap = () => {
+const SearchResultMap = () => {
 
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-script',
@@ -43,7 +43,6 @@ const AddNewMap = () => {
         mapContainerStyle={containerStyle}
         center={center}
         zoom={14}
-        // onLoad={onLoad}
         onUnmount={onUnmount}
         options={options}
       >
@@ -53,4 +52,4 @@ const AddNewMap = () => {
   ) : <></>
 }
 
-export default AddNewMap;
+export default SearchResultMap;
