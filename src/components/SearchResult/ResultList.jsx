@@ -1,12 +1,13 @@
-import { Paper, Button, ListItem, ListItemText, ListItemButton, Box } from "@mui/material";
-import { ThemeProvider } from "@mui/private-theming";
-import theme from '../../theme';
 import ResultListItem from "./ResultListItem";
 
-const ResultList = () => {
+const ResultList = (props) => {
+  const listData = props.listData;
+  console.log(listData);
+  const list = listData.map(data => {return <ResultListItem key={data.id} {...data}/>}) 
+
   return(
     <div className="list-container">
-        <ResultListItem />
+        {list}
     </div>
   )
 }
