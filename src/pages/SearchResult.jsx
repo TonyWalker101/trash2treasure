@@ -1,4 +1,4 @@
-import AddNewMap from "../components/AddNew/AddNewMap";
+import AddMapDonations from "../components/AddNew/AddMapDonations";
 import SearchHeader from "../components/layout/SearchHeader";
 import TreasureList from "../components/Treasures/TreasureList";
 
@@ -7,7 +7,7 @@ const SearchResult = () => {
     <div>
       <SearchHeader />
       <h1>Search Result</h1>
-      <AddNewMap/>
+      <AddMapDonations/>
       <TreasureList/>
     </div>
   )
