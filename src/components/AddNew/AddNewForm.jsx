@@ -2,8 +2,54 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme';
 import { Typography, TextField, FormControl, InputLabel, Select, MenuItem, Button} from '@mui/material';
 import { useState } from 'react';
+import axios from "axios";
+
+// cloudinary.config({ 
+//   cloud_name: "djv3yhbok",
+//   api_key: "373195159265376",
+//   api_secret: "NUmKQT4OPyUxPinBj7qsfCF-XxY",
+//   secure: true
+// });
 
 const AddNewForm = (props) => {
+
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  // On file select (from the pop up)
+  const onFileChange = event => {
+  
+    // Update the state
+    setSelectedFile({ selectedFile: event.target.files[0] });
+    onFileUpload();
+  
+    Promise.all([
+      axios.post(`https://api.cloudinary.com/v1_1/djv3yhbok/upload`, selectedFile)
+    ])
+    .then((e) => console.log(e))
+    .catch((error) => console.log(`Error loading API data. Error: ${error}`));
+
+    // cloudinary.uploader.upload(selectedFile, function(error, result) {console.log(result, error)});
+  };
+
+  const onFileUpload = () => {
+    
+    // Create an object of formData
+    const formData = new FormData();
+  
+    // Update the formData object
+    formData.append(
+      "myFile",
+      selectedFile
+    )
+    return formData
+  };
+
+  console.log("file name:", selectedFile);
+
+  const populateForm = () => {
+    
+  };
+
   return(
     <div className="form-container">
       <ThemeProvider theme={theme}>
@@ -39,14 +85,14 @@ const AddNewForm = (props) => {
             />
 
           <>
-          <input accept="image/*" type="file" id="select-image" style={{ display: 'none' }}/>
+          <input accept="image/*" type="file" id="select-image" style={{ display: 'none' }} onChange={(e) => onFileChange(e)}/>
           <label htmlFor="select-image">
           <Button variant="contained" component="span" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary">Upload An Image</Button>
           </label></>
           <Typography variant="helper" sx={{mt: -5}}>Please upload a jpep, jpg or png file</Typography>
 
 
-          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" sx={{mt: 5, width: "100%"}} >Submit</Button>
+          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" sx={{mt: 5, width: "100%"}} onClick={console.log("Button Test")}>Submit</Button>
         </form>
       </ThemeProvider>
     </div>
