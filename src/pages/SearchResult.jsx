@@ -1,3 +1,4 @@
+import AddMapDonations from "../components/AddNew/AddMapDonations";
 import SearchHeader from "../components/layout/SearchHeader";
 import SearchResultMap from "../components/SearchResult/SearchResultMap";
 import ResultList from "../components/SearchResult/ResultList";
