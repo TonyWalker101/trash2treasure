@@ -26,7 +26,7 @@ function TreasureList() {
     return (
       <Treasure key={treasure} id={treasure}/>
     )
-  }); 
+  });
 
   return (
     <>

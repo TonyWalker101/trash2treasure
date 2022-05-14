@@ -15,6 +15,8 @@ const center = {
 
 const AddNewMap = () => {
 
+  console.log("key:", process.env);
+
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
