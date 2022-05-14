@@ -43,7 +43,7 @@ const AddNewForm = (props) => {
           <label htmlFor="select-image">
           <Button variant="contained" component="span" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary">Upload An Image</Button>
           </label></>
-          <Typography variant="helper" sx={{mt: -5}}>Please upload a jpep, jpg or png file</Typography>
+          <Typography variant="helper" sx={{mt: -3}}>Please upload a jpep, jpg or png file</Typography>
 
 
           <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" sx={{mt: 5, width: "100%"}} >Submit</Button>
