@@ -65,3 +65,22 @@
 .gm-style .gm-style-iw-c  {
   max-width: 300px !important;
 }
+
+/* Modal */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  width: 70vw;
+  height: 80vh;
+  background-color: #fff;
+}
+
+.close-button {
+  background-color: #fff;
+  border: none;
+  position: relative;
+}
