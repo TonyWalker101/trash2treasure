@@ -4,9 +4,11 @@ import theme from '../../theme';
 import ReactTimeAgo from 'react-time-ago'
 
 const ResultListItem = (props) => {
+  const sectionClass = props.selected? "item-card- selected" : "item-card";
+
   return(
     <ThemeProvider theme={theme}>
-      <div className="item-card">
+      <section className={props.selected.id === props.order? "item-card-selected" : "item-card"} id={`item-id-${props.order}`}>
         <div className="image-crop">
           <img src={props.image} alt="treasure-photo" className="item-img"/>
         </div>
@@ -18,7 +20,7 @@ const ResultListItem = (props) => {
             <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="itemButton" color="primary"  >Details</Button>
           </div>
         </div>
-      </div>
+      </section>
 
     </ThemeProvider>
 )

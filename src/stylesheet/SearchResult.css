@@ -18,6 +18,16 @@
   align-items: center;
 }
 
+.item-card-selected {
+  height: auto;
+  width: auto;
+  border: 5px solid #87cdd1;
+  display: flex;
+  flex-direction: row;
+  padding: 5% 0;
+  align-items: center;
+}
+
 .image-crop {
   width: 200px;
   height: 200px;
@@ -49,4 +59,9 @@
 .itemButton {
   height: 50px;
   width: 200px;
+}
+
+/* Map info window */
+.gm-style .gm-style-iw-c  {
+  max-width: 300px !important;
 }

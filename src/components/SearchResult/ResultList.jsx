@@ -1,12 +1,13 @@
 import ResultListItem from "./ResultListItem";
+import { useEffect } from "react";
 
 const ResultList = (props) => {
   const listData = props.listData;
-  console.log(listData);
-  const list = listData.map(data => {return <ResultListItem key={data.id} {...data}/>}) 
+  const list = listData.map(data => {return <ResultListItem key={data.id} {...data} order={data.id} selected={props.selected}/>}) 
+
 
   return(
-    <div className="list-container">
+    <div className="list-container" id="list-container">
         {list}
     </div>
   )

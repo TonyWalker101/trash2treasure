@@ -48,6 +48,11 @@ const theme = createTheme({
       fontFamily: ['Poppins', 'sans-serif'].join(","), 
       fontSize: 15
     }, 
+    infoWindow:{
+      fontWeight: "bold", 
+      fontFamily: ['Poppins', 'sans-serif'].join(","), 
+      fontSize: 14
+    }
   }
 });
 
