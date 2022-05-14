@@ -4,11 +4,16 @@ import theme from '../../theme';
 import ReactTimeAgo from 'react-time-ago'
 
 const ResultListItem = (props) => {
-  const sectionClass = props.selected? "item-card- selected" : "item-card";
+  const selectedId = () => {
+    if (props.selected.id && (props.selected.id === props.order)) {
+      return true;
+    } 
+    return false;
+  }
 
   return(
     <ThemeProvider theme={theme}>
-      <section className={props.selected.id === props.order? "item-card-selected" : "item-card"} id={`item-id-${props.order}`}>
+      <section className={selectedId()? "item-card-selected" : "item-card"} id={`item-id-${props.order}`}>
         <div className="image-crop">
           <img src={props.image} alt="treasure-photo" className="item-img"/>
         </div>
