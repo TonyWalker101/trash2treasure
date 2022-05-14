@@ -1,4 +1,4 @@
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader,LoadScript } from '@react-google-maps/api';
 import React from "react";
 import mapStyles from "../../mapStyles";
 
@@ -42,8 +42,8 @@ const AddNewMap = () => {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={5}
-        onLoad={onLoad}
+        zoom={14}
+        // onLoad={onLoad}
         onUnmount={onUnmount}
         options={options}
       >

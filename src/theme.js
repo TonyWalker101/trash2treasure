@@ -37,6 +37,21 @@ const theme = createTheme({
       fontWeight: "regular", 
       fontFamily: ['Poppins', 'sans-serif'].join(","), 
       fontSize: 14
+    }, 
+    itemTitle: {
+      fontWeight: "bold", 
+      fontFamily: ['Poppins', 'sans-serif'].join(","), 
+      fontSize: 20
+    }, 
+    itemText: {
+      fontWeight: "regular", 
+      fontFamily: ['Poppins', 'sans-serif'].join(","), 
+      fontSize: 15
+    }, 
+    infoWindow:{
+      fontWeight: "bold", 
+      fontFamily: ['Poppins', 'sans-serif'].join(","), 
+      fontSize: 14
     }
   }
 });
