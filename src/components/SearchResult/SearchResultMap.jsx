@@ -20,7 +20,7 @@ const SearchResultMap = (props) => {
 
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+    googleMapsApiKey: "AIzaSyAy1SXOH3JNtfc-VbNZ3-OX0iAGctZ0hls"
   })
 
   const [map, setMap] = React.useState(null)
