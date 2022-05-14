@@ -8,7 +8,6 @@ const ResultListItem = (props) => {
     if (props.selected.id && (props.selected.id === props.order)) {
       return true;
     } 
-
     return false;
   }
 
