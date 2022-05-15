@@ -18,7 +18,8 @@ const SearchResult = () => {
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:3001/"),
-      axios.get("http://localhost:3001/comments")
+      axios.get("http://localhost:3001/comments"), 
+      axios.get("http://localhost:3001/users")
     ])
     .then((all) => setResults(
       prev => ({...prev, listData:all[0].data,
