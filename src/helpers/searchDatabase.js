@@ -1,5 +1,4 @@
 import Geocode from "react-geocode"
-import * as JsSearch from "js-search";
 import listData from "../__mocks__/list";
 
 // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
