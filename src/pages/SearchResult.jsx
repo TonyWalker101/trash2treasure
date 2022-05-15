@@ -3,11 +3,10 @@ import SearchResultMap from "../components/SearchResult/SearchResultMap";
 import ResultList from "../components/SearchResult/ResultList";
 import "../stylesheet/SearchResult.css";
 
-import { useState } from "react";
 import DetailsModal from "../components/SearchResult/DetailsModal";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import DetailsModal from "../components/SearchResult/DetailsModal";
+
 
 const SearchResult = () => {
   const [markers, setMarkers] = useState([]);
