@@ -14,6 +14,9 @@ const SearchResult = () => {
   const [modal, setModal] = useState(null);
   const [results, setResults] = useState({comments: [], listData: []});
 
+  const updateStateFromSearch = data => {
+    setResults(prev => ({...prev, listData: data}));
+  }
 
   useEffect(() => {
     Promise.all([
@@ -30,7 +33,7 @@ const SearchResult = () => {
 
   return(
     <div>
-      <SearchHeader />
+      <SearchHeader onChange={(event) => updateStateFromSearch(event)}/>
       <SearchResultMap listData={results.listData} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected}/>
       <ResultList listData={results.listData} selected={selected} setModal={setModal}/>
       <DetailsModal listData={results.listData} modal={modal} setModal={setModal}/>
