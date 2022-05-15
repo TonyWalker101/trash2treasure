@@ -33,7 +33,7 @@ const DetailsModal = (props) => {
         <div className="modal-container">
 
           <div className="button-container">
-            <button onClick={()=>props.setModal(null)} className="close-button"><i class="fa-solid fa-xmark fa-2xl"></i></button>
+            <button onClick={()=>props.setModal(null)} className="close-button"><i className="fa-solid fa-xmark fa-2xl"></i></button>
           </div>
 
           <div className="details-container">
