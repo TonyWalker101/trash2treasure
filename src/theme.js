@@ -52,7 +52,17 @@ const theme = createTheme({
       fontWeight: "bold", 
       fontFamily: ['Poppins', 'sans-serif'].join(","), 
       fontSize: 14
-    }
+    }, 
+    modalTitle:{
+      fontWeight: "bold", 
+      fontFamily: ['Poppins', 'sans-serif'].join(","), 
+      fontSize: 20
+    }, 
+    modalText:{
+      fontWeight: "regular", 
+      fontFamily: ['Poppins', 'sans-serif'].join(","), 
+      fontSize: 14
+    }, 
   }
 });
 
