@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 const ResultList = (props) => {
   const listData = props.listData;
-  const list = listData.map(data => {return <ResultListItem key={data.id} {...data} order={data.id} selected={props.selected}/>}) 
+  const list = listData.map(data => {return <ResultListItem key={data.id} {...data} order={data.id} selected={props.selected} setModal={props.setModal}/>}) 
 
 
   return(

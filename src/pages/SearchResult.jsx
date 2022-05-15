@@ -4,10 +4,12 @@ import ResultList from "../components/SearchResult/ResultList";
 import "../stylesheet/SearchResult.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import DetailsModal from "../components/SearchResult/DetailsModal";
 
 const SearchResult = () => {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [modal, setModal] = useState(null);
   const [results, setResults] = useState({comments: [], listData: []});
 
   useEffect(() => {
@@ -27,7 +29,8 @@ const SearchResult = () => {
     <div>
       <SearchHeader />
       <SearchResultMap listData={results.listData} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected}/>
-      <ResultList listData={results.listData} selected={selected}/>
+      <ResultList listData={results.listData} selected={selected} setModal={setModal}/>
+      <DetailsModal listData={results.listData} modal={modal} setModal={setModal}/>
     </div>
   )
 }
