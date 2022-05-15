@@ -5,7 +5,7 @@ import theme from '../../theme';
 import searchButtonClicked from '../../helpers/searchDatabase';
 import { useState } from "react";
 
-const HomeHeader = () => {
+const HomeHeader = (props) => {
 
   const [search, setSearch] = useState({
     location: null,
@@ -20,6 +20,11 @@ const HomeHeader = () => {
     setSearch(prev => ({...prev, item: e}));
   }
 
+  const handleSearch = () => {
+    const results = searchButtonClicked(search);
+    props.onChange(results);
+  }
+
   return(
     <header>
       <nav id="search-nav">
@@ -30,15 +35,15 @@ const HomeHeader = () => {
         </ThemeProvider>
       </nav>
         
-        <form class="header-search-bar">
+        <form className="header-search-bar">
           <ThemeProvider theme={theme}>
           
           <TextField id="filled-basic" label="Search by location" variant="filled" size="small"   InputProps={{ disableUnderline: true}} onChange={(event) => handleLocationInputChanged(event.target.value)}/>
-          <div class="vl"></div>
+          <div className="vl"></div>
 
           <TextField id="filled-basic" label="Search by item" variant="filled" size="small" InputProps={{ disableUnderline: true }} onChange={(event) => handleItemInputChanged(event.target.value)}/>
 
-            <Button variant="contained" disableElevation color="primary" className="search-button" sx={{ borderRadius: 8 }} onClick={() => searchButtonClicked(search)}><i class="fa-solid fa-magnifying-glass fa-xl"></i></Button>
+            <Button variant="contained" disableElevation color="primary" className="search-button" sx={{ borderRadius: 8 }} onClick={handleSearch} ><i className="fa-solid fa-magnifying-glass fa-xl"></i></Button>
           </ThemeProvider>
         </form>
     </header>
