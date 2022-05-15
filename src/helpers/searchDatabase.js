@@ -22,11 +22,6 @@ const getGeocode = location => {
   );
 }
 
-// const search = new JsSearch.Search('name');
-// search.addIndex('description');
-// const searchData = listData.map(item => item.id = item);
-// search.addDocument(searchData);
-
 const searchDB = (data, item) => {
   if (!item) {
     return;
@@ -35,12 +30,6 @@ const searchDB = (data, item) => {
   const searchableItem = item.toLowerCase();
 
   const matchingResults = data.filter(treasure => {
-    // if (treasure.name.toLowerCase().includes(searchableItem) || treasure.description.toLowerCase().includes(searchableItem)) {
-    //   return treasure;
-    // } else {
-    //   ;
-    // }
-
     return treasure.name.toLowerCase().includes(searchableItem) || treasure.description.toLowerCase().includes(searchableItem);
   });
   
@@ -49,7 +38,7 @@ const searchDB = (data, item) => {
 };
 
 
-const searchButtonClicked = (form) => {
+const searchButtonClicked = (form, previousResults) => {
 
   // const searchLocation = getGeocode(form);
   if (form.location) {
@@ -59,8 +48,9 @@ const searchButtonClicked = (form) => {
 
   if (form.item) {
     console.log(`Looking for ${form.item}?`)
-    console.log(searchDB(listData, form.item));
-    const results = searchDB(listData, form.item);
+    // console.log("previous resulst", previousResults);
+    // console.log(searchDB(previousResults, form.item));
+    const results = searchDB(previousResults, form.item);
     return results;
   }
   // console.log("this is the event form:", form)
