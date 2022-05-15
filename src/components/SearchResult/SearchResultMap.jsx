@@ -95,7 +95,7 @@ const SearchResultMap = (props) => {
                 <Typography variant="infoWindow">
                   {props.selected.title}
                 </Typography>
-                <p>Posted <ReactTimeAgo date={props.selected.created_at} locale="en-US"/></p>
+                <p>Posted <ReactTimeAgo date={Date.parse(props.selected.created_at)} locale="en-US"/></p>
               </div>
             </ThemeProvider>
           </InfoWindow>

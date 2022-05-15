@@ -8,21 +8,26 @@ import axios from "axios";
 const SearchResult = () => {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState({comments: [], listData: []});
 
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:3001/")
+      axios.get("http://localhost:3001/"),
+      axios.get("http://localhost:3001/comments")
     ])
-    .then((e) => setResults(e[0].data))
+    .then((all) => setResults(
+      prev => ({...prev, listData:all[0].data,
+        comments:all[1].data
+      })
+    ))
     .catch((error) => console.log(`Error loading API data. Error: ${error}`));
   }, []);
 
   return(
     <div>
       <SearchHeader />
-      <SearchResultMap listData={results} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected}/>
-      <ResultList listData={results} selected={selected}/>
+      <SearchResultMap listData={results.listData} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected}/>
+      <ResultList listData={results.listData} selected={selected}/>
     </div>
   )
 }
