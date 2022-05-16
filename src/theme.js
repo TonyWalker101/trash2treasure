@@ -62,7 +62,11 @@ const theme = createTheme({
       fontWeight: "regular", 
       fontFamily: ['Poppins', 'sans-serif'].join(","), 
       fontSize: 14
-
+    }, 
+    commentInfo:{
+      fontWeight: "regular", 
+      fontFamily: ['Poppins', 'sans-serif'].join(","), 
+      fontSize: 12
     }, 
   }
 });

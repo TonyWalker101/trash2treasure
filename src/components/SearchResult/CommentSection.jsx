@@ -21,9 +21,9 @@ const CommentSection = (props) => {
         props.comments.map((data, index) => {
           return(
             <section className="comment-section" key={index}>
-              <Typography variant='modalText'>{data.comment}</Typography>
-              <Typography variant='modalText'>Posted by {data.id}</Typography>
-              <Typography variant='modalText'>Posted <ReactTimeAgo date={Date.parse(data.created_at)} locale="en-US"/></Typography>
+            <Typography variant='modalText' sx={{mb:3}}>{data.comment}</Typography>
+              <Typography variant='commentInfo' align="right">Posted by {data.id}</Typography>
+              <Typography variant='commentInfo' align="right"><ReactTimeAgo date={Date.parse(data.created_at)} locale="en-US"/></Typography>
             </section>
           )}
         )
