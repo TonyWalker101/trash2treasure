@@ -4,50 +4,29 @@ import { Typography, TextField, FormControl, InputLabel, Select, MenuItem, Butto
 import { useState } from 'react';
 import axios from "axios";
 
-// cloudinary.config({ 
-//   cloud_name: "djv3yhbok",
-//   api_key: "373195159265376",
-//   api_secret: "NUmKQT4OPyUxPinBj7qsfCF-XxY",
-//   secure: true
-// });
-
 const AddNewForm = (props) => {
 
   const [selectedFile, setSelectedFile] = useState(null);
 
-  // On file select (from the pop up)
-  const onFileChange = event => {
+  const onFormSubmit = () => {
   
-    // Update the state
-    setSelectedFile({ selectedFile: event.target.files[0] });
-    onFileUpload();
+    // setSelectedFile({ selectedFile: event.target.files[0] });
+    const form = onFileUpload();
   
-    Promise.all([
-      axios.post(`https://api.cloudinary.com/v1_1/djv3yhbok/upload`, selectedFile)
-    ])
-    .then((e) => console.log(e))
+    axios.post(`https://api.cloudinary.com/v1_1/djv3yhbok/image/upload`, form)
+    .then((e) => console.log("Success!:", e.data.url))
     .catch((error) => console.log(`Error loading API data. Error: ${error}`));
 
-    // cloudinary.uploader.upload(selectedFile, function(error, result) {console.log(result, error)});
   };
 
   const onFileUpload = () => {
     
-    // Create an object of formData
     const formData = new FormData();
   
-    // Update the formData object
-    formData.append(
-      "myFile",
-      selectedFile
-    )
+    formData.append("file", selectedFile);
+    formData.append("upload_preset", "rzhq8txe");
+
     return formData
-  };
-
-  console.log("file name:", selectedFile);
-
-  const populateForm = () => {
-    
   };
 
   return(
@@ -85,14 +64,14 @@ const AddNewForm = (props) => {
             />
 
           <>
-          <input accept="image/*" type="file" id="select-image" style={{ display: 'none' }} onChange={(e) => onFileChange(e)}/>
+          <input accept="image/*" type="file" id="select-image" style={{ display: 'none' }} onChange={(event) => setSelectedFile(event.target.files[0])}/>
           <label htmlFor="select-image">
           <Button variant="contained" component="span" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary">Upload An Image</Button>
           </label></>
           <Typography variant="helper" sx={{mt: -3}}>Please upload a jpep, jpg or png file</Typography>
 
 
-          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" sx={{mt: 5, width: "100%"}} onClick={console.log("Button Test")}>Submit</Button>
+          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" sx={{mt: 5, width: "100%"}} onClick={onFormSubmit}>Submit</Button>
         </form>
       </ThemeProvider>
     </div>
