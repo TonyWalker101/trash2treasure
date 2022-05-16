@@ -1,10 +1,11 @@
 import { Modal, Button } from "@mui/material";
-import { getDataById } from "../../helpers/selector";
+import { getDataById, getUserNameByItemId, getCommentsByItemId } from "../../helpers/selector";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme';
 import ReactTimeAgo from 'react-time-ago'
 import { Typography } from "@mui/material";
 import { useState } from "react";
+import CommentSection from "./CommentSection";
 
 const DetailsModal = (props) => {
   const [claim, setClaim] = useState(null)
@@ -17,6 +18,8 @@ const DetailsModal = (props) => {
     } 
     return true;
   }
+
+  const userName = getUserNameByItemId(props.users, props.listData, props.modal)
 
   // console.log(selectedData);
 
@@ -44,20 +47,22 @@ const DetailsModal = (props) => {
             <div className="details-text-containter">
                 <Typography variant="modalTitle" sx={{mb: 5}}>{selectedData && selectedData.name}</Typography>
 
-                <Typography variant="modalText" sx={{mb: 2}}>Location: {selectedData && selectedData.location}</Typography>
+                <Typography variant="modalText" sx={{mb: 2}}><b>Location: </b>{selectedData && selectedData.location}</Typography>
 
-                <Typography variant="modalText" sx={{mb: 2}}>Condition: {selectedData && selectedData.condition}</Typography>
+                <Typography variant="modalText" sx={{mb: 2}}><b>Condition: </b>{selectedData && selectedData.condition}</Typography>
 
-                <Typography variant="modalText" sx={{mb: 2}}>Description: {selectedData && selectedData.description}</Typography>
+                <Typography variant="modalText" sx={{mb: 2}}><b>Description: </b>{selectedData && selectedData.description}</Typography>
+
+                <Typography variant="modalText" sx={{mb: 2}}><b>Posted by: </b>{userName}</Typography>
 
                 <Typography variant="modalText" sx={{mb: 10}}>Posted {selectedData && <ReactTimeAgo date={Date.parse(selectedData.created_at)} locale="en-US"/>}</Typography>
                 
                 
                 {(claim === null)?
-                    <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="claim-button" color="primary" onClick={() => setClaim(props.modal)}>Claim</Button>
+                    <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="claim-button" color="primary" onClick={() => setClaim(props.modal)} sx={{mt: 1}}>Claim</Button>
                
                 :(
-                    <div>
+                    <div className="confirm-container">
                       <Typography variant="modalText" sx={{mb: 10}}><b>Are you sure you are at the location & want to claim the item?</b></Typography> 
                       <div className="confirm-button-group">
                         <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="primary" onClick={() => setClaim(null)}>Cancel</Button>
@@ -67,14 +72,14 @@ const DetailsModal = (props) => {
                   </div>
                 )}
                 
-            <form>
-              
-            </form>
                 
                 
             </div>
           </div>
         </div>
+            <div>
+            <CommentSection />
+            </div>
       </ThemeProvider>
       </>
     </Modal>

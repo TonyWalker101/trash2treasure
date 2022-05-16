@@ -4,6 +4,7 @@ import AddNewForm from "../components/AddNew/AddNewForm";
 import "../stylesheet/AddNew.css";
 import { useState } from "react";
 import convertAddressToLink from "../helpers/getCoordinateByAddress"
+import CommentSection from "../components/SearchResult/CommentSection";
 
 const AddNew = () => {
   const [location, setLocation] = useState({

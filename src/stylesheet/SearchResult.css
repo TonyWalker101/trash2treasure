@@ -132,6 +132,10 @@
   height: 50px;
 }
 
+.confirm-container {
+  margin-top: -37px;;
+}
+
 .confirm-button-group {
   display: flex;
   justify-content: space-between;

@@ -34,7 +34,7 @@ const SearchResult = () => {
       <SearchHeader />
       <SearchResultMap listData={results.listData} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected}/>
       <ResultList listData={results.listData} selected={selected} setModal={setModal}/>
-      <DetailsModal listData={results.listData} modal={modal} setModal={setModal} users={users}/>
+      <DetailsModal listData={results.listData} modal={modal} setModal={setModal} users={results.users} comments={results.comments}/>
 
     </div>
   )
