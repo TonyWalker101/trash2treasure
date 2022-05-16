@@ -3,20 +3,44 @@ import theme from '../../theme';
 import { Typography, TextField, FormControl, InputLabel, Select, MenuItem, Button} from '@mui/material';
 import { useState } from 'react';
 import axios from "axios";
+import getGeocode from '../../helpers/getGeoCode';
 
 const AddNewForm = (props) => {
 
   const [selectedFile, setSelectedFile] = useState(null);
 
+  const [form, setForm] = useState({
+    name: null,
+    latitude: null,
+    longitude: null,
+    location: null,
+    condition: null,
+    description: null,
+    image: null
+  })
+
   const onFormSubmit = () => {
   
     // setSelectedFile({ selectedFile: event.target.files[0] });
-    const form = onFileUpload();
-  
-    axios.post(`https://api.cloudinary.com/v1_1/djv3yhbok/image/upload`, form)
-    .then((e) => console.log("Success!:", e.data.url))
-    .catch((error) => console.log(`Error loading API data. Error: ${error}`));
+    const formData = onFileUpload();
 
+    Promise.all([
+      axios.post(`https://api.cloudinary.com/v1_1/djv3yhbok/image/upload`, formData),
+      getGeocode(form.location),
+    ]).then((all) => {
+      setForm(prev => ({...prev, image: all[0].data.url, latitude: all[1][0], longitude: all[1][1]}))
+      console.log("Form populated successfully!")
+
+      // axios.post("http://localhost:3001/add-donation", form)
+      // console.log("Form successfully sent to database:", form)
+      
+    }).catch((error) => console.log(`Error loading form data. Error: ${error}`))
+    .then((e) => {
+      axios.post("http://localhost:3001/add-donation", form)
+      console.log("Form sent to database:", form)
+    })
+    .catch((error) => console.log(`Error loading form data. Error: ${error}`))
+    
   };
 
   const onFileUpload = () => {
@@ -35,9 +59,9 @@ const AddNewForm = (props) => {
         <Typography variant="title" id="add-new-title" sx={{mb: 5}}>Add A Treasure</Typography>
 
         <form id="add-new-form">
-          <TextField id="outlined-basic" label="Title" variant="outlined" />
+          <TextField id="outlined-basic" label="Title" variant="outlined" onChange={(e) => setForm(prev => ({...prev, name: e.target.value}))}/>
           <div className='search-container'>
-            <TextField id="outlined-basic" label="Location" variant="outlined" sx={{width: "100%"}}/>
+            <TextField id="outlined-basic" label="Location" variant="outlined" sx={{width: "100%"}} onChange={(e) => setForm(prev => ({...prev, location: e.target.value}))}/>
             <button id="address-button" ><i class="fa-solid fa-magnifying-glass fa-xl"></i></button>
             <Typography variant="helper" sx={{mt: -5}}>Please input an address <b>OR</b> adjust the pin on the map to generate a location</Typography>
           </div>
@@ -48,6 +72,7 @@ const AddNewForm = (props) => {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               label="Condition"
+              onChange={(e) => setForm(prev => ({...prev, condition: e.target.value}))}
               >
               <MenuItem value={"Like New"}>Like New</MenuItem>
               <MenuItem value={"Good"}>Good</MenuItem>
@@ -61,6 +86,7 @@ const AddNewForm = (props) => {
             label="Description"
             multiline
             minRows={4}
+            onChange={(e) => setForm(prev => ({...prev, description: e.target.value}))}
             />
 
           <>
