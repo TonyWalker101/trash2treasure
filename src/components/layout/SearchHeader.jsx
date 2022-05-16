@@ -23,7 +23,7 @@ const HomeHeader = (props) => {
   const handleSearch = () => {
     const previousResults = props.resultState;
 
-    const results = searchButtonClicked(search, previousResults);
+    const results = searchButtonClicked(search, previousResults) || previousResults;
     
     props.onChange(results);
   }
