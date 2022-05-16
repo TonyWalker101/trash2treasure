@@ -68,6 +68,12 @@ const theme = createTheme({
       fontFamily: ['Poppins', 'sans-serif'].join(","), 
       fontSize: 12
     }, 
+    errorText: {
+      fontWeight: "regular", 
+      fontFamily: ['Poppins', 'sans-serif'].join(","), 
+      fontSize: 14,
+      color: "#bd372d"
+    }
   }
 });
 

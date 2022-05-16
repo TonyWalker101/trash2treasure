@@ -8,7 +8,9 @@ import { useState } from "react";
 import CommentSection from "./CommentSection";
 
 const DetailsModal = (props) => {
-  const [claim, setClaim] = useState(null)
+  const [claim, setClaim] = useState(null);
+  const [comment, setComment] = useState({user_id: 1, comment: '', donation_id: null});
+  const [submitError, setSubmitError] = useState(false);
 
   const selectedData = getDataById(props.listData, props.modal)[0]
 
@@ -23,7 +25,16 @@ const DetailsModal = (props) => {
 
   const comments = getCommentsByItemId(props.comments, props.modal);
 
-  // console.log(comments);
+  console.log(comment);
+  
+  const onSubmit = () => {
+    if (comment.comment === "") {
+      setSubmitError(true);
+    } else {
+      setSubmitError(false);
+    }
+  }
+
   return(
     <Modal
       open={setOpen()}
@@ -65,7 +76,7 @@ const DetailsModal = (props) => {
                 
                   :(
                       <div className="confirm-container">
-                        <Typography variant="modalText" sx={{mb: 10}}><b>Are you sure you are at the location & want to claim the item?</b></Typography> 
+                        <Typography variant="modalText" sx={{mb: 10}} ><b>Are you sure you are at the location & want to claim the item?</b></Typography> 
                         <div className="confirm-button-group">
                           <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="primary" onClick={() => setClaim(null)}>Cancel</Button>
         
@@ -91,9 +102,16 @@ const DetailsModal = (props) => {
               multiline
               minRows={4}
               sx={{mt: 5}}
+              onChange={e => {setComment({...comment, comment: e.target.value, donation_id: props.modal})}}
               />
             <div id="comment-button-container">
-              <Button variant="contained" fontWeight="fontWeightRegular" disableElevation id="comment-button" color="primary" sx={{mb: "10vh", mt: 5}} onClick={e => {e.preventDefault(); console.log("Button Test")}}>Submit</Button>
+              <div id="comment-button-layout">
+              <Button variant="contained" fontWeight="fontWeightRegular" disableElevation id="comment-button" color="primary" sx={{mt: 5}} onClick={e => {e.preventDefault(); onSubmit()}}>Submit</Button>
+
+              </div>
+              {submitError &&
+              <Typography variant="errorText" align="right">* Can not submit empty commment</Typography>
+              }
             </div>
         </form >
         </div>
