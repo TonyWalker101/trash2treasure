@@ -6,10 +6,11 @@ import ReactTimeAgo from 'react-time-ago'
 import { Typography } from "@mui/material";
 import { useState } from "react";
 import CommentSection from "./CommentSection";
+import axios from "axios";
 
 const DetailsModal = (props) => {
   const [claim, setClaim] = useState(null);
-  const [comment, setComment] = useState({user_id: 1, comment: '', donation_id: null});
+  const [comment, setComment] = useState({comment: '', donation_id: null});
   const [submitError, setSubmitError] = useState(false);
 
   const selectedData = getDataById(props.listData, props.modal)[0]
@@ -32,6 +33,10 @@ const DetailsModal = (props) => {
       setSubmitError(true);
     } else {
       setSubmitError(false);
+      Promise.all([
+        axios.post('http://localhost:3001/add-comment', comment)
+      ])
+      .catch((error) => console.log(`Error loading API data. Error: ${error}`));
     }
   }
 
