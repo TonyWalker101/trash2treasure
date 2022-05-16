@@ -27,7 +27,7 @@ const DetailsModal = (props) => {
   return(
     <Modal
       open={setOpen()}
-      onClose={()=>props.setModal(null)}
+      onClose={()=>{props.setModal(null); setClaim(null);}}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
       className="modal"
@@ -38,7 +38,7 @@ const DetailsModal = (props) => {
         <div className="modal-container">
           <div className="item-info-container">
             <div className="button-container">
-              <button onClick={()=>props.setModal(null)} className="close-button"><i class="fa-solid fa-xmark fa-2xl"></i></button>
+              <button onClick={()=>{props.setModal(null); setClaim(null)}} className="close-button"><i class="fa-solid fa-xmark fa-2xl"></i></button>
             </div>
 
             <div className="details-container">
@@ -81,7 +81,7 @@ const DetailsModal = (props) => {
           </div>
 
           <div className="comment-container">
-          <CommentSection comments={comments}/>
+          <CommentSection comments={comments} users={props.users} />
           </div>
           <form className="add-comment-container">
 
@@ -93,7 +93,7 @@ const DetailsModal = (props) => {
               sx={{mt: 5}}
               />
             <div id="comment-button-container">
-              <Button variant="contained" fontWeight="fontWeightRegular" disableElevation id="comment-button" color="primary" sx={{mb: "10vh", mt: 5}} onClick={console.log("Button Test")}>Submit</Button>
+              <Button variant="contained" fontWeight="fontWeightRegular" disableElevation id="comment-button" color="primary" sx={{mb: "10vh", mt: 5}} onClick={e => {e.preventDefault(); console.log("Button Test")}}>Submit</Button>
             </div>
         </form >
         </div>
