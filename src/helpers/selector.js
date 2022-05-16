@@ -13,7 +13,7 @@ export function getUserNameByItemId (userData, itemData, id) {
 }
 
 export function getCommentsByItemId (commentsData, id) {
-  if (id === null) {return}
+  if (id === null) {return null}
 
   const comments = commentsData.filter(all => all.donation_id === id);
 
