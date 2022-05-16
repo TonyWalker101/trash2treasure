@@ -183,3 +183,20 @@
   flex-direction: column;
   justify-content: flex-end;
 }
+
+.add-comment-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+#comment-button {
+  width: 200px;
+  height: 50px;
+}
+
+#comment-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}

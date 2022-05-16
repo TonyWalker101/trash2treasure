@@ -1,4 +1,4 @@
-import { Modal, Button } from "@mui/material";
+import { Modal, Button, TextField } from "@mui/material";
 import { getDataById, getUserNameByItemId, getCommentsByItemId } from "../../helpers/selector";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme';
@@ -83,6 +83,19 @@ const DetailsModal = (props) => {
           <div className="comment-container">
           <CommentSection comments={comments}/>
           </div>
+          <form className="add-comment-container">
+
+            <TextField
+              id="outlined-multiline-flexible"
+              label="Add a comment"
+              multiline
+              minRows={4}
+              sx={{mt: 5}}
+              />
+            <div id="comment-button-container">
+              <Button variant="contained" fontWeight="fontWeightRegular" disableElevation id="comment-button" color="primary" sx={{mb: "10vh", mt: 5}} onClick={console.log("Button Test")}>Submit</Button>
+            </div>
+        </form >
         </div>
       </ThemeProvider>
       </>
