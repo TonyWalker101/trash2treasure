@@ -18,28 +18,50 @@ const AddNewForm = (props) => {
     description: null,
     image: null
   })
-
+  
   const onFormSubmit = () => {
   
     // setSelectedFile({ selectedFile: event.target.files[0] });
+    const uploadImage = "https://api.cloudinary.com/v1_1/djv3yhbok/image/upload"
     const formData = onFileUpload();
 
     Promise.all([
-      axios.post(`https://api.cloudinary.com/v1_1/djv3yhbok/image/upload`, formData),
+      axios.post(uploadImage, formData),
       getGeocode(form.location),
     ]).then((all) => {
-      setForm(prev => ({...prev, image: all[0].data.url, latitude: all[1][0], longitude: all[1][1]}))
-      console.log("Form populated successfully!")
+      const updatedForm = {...form, image: all[0].data.url, latitude: all[1][0], longitude: all[1][1]}
+
+      // populateForm(all)
+      axios.post("http://localhost:3001/add-donation", updatedForm)
+      
+      .then(() => {
+        setForm(prev => ({...prev, image: all[0].data.url, latitude: all[1][0], longitude: all[1][1]}))
+        console.log("Form sent to database:", updatedForm)})
+      .catch((error) => console.log(`Error sending form to db. Error: ${error}`))
+
+      // console.log("Form populated successfully!")
+
+      // do {
+      //   console.log("Waiting")
+      // } while (!form.lng && form.lat && form.image)
+
+      // axios.post("http://localhost:3001/add-donation", form)
+      // console.log("Form sent to database:", form)
 
       // axios.post("http://localhost:3001/add-donation", form)
       // console.log("Form successfully sent to database:", form)
       
     }).catch((error) => console.log(`Error loading form data. Error: ${error}`))
-    .then((e) => {
-      axios.post("http://localhost:3001/add-donation", form)
-      console.log("Form sent to database:", form)
-    })
-    .catch((error) => console.log(`Error loading form data. Error: ${error}`))
+
+    // const populateForm = (all) => {
+    //   setForm(prev => ({...prev, image: all[0].data.url, latitude: all[1][0], longitude: all[1][1]}))
+
+    //   while (form.lng === null || form.lat === null || form.image === null) {
+    //     console.log("Waiting");
+    //   }
+
+    //   return;
+    // }
     
   };
 
