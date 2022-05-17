@@ -1,5 +1,6 @@
 import Geocode from "react-geocode"
 import listData from "../__mocks__/list";
+import axios from "axios";
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
@@ -28,13 +29,19 @@ const searchDB = (data, item) => {
     return;
   }
 
-  const searchableItem = item.toLowerCase();
+  // const searchableItem = item.toLowerCase();
 
-  const matchingResults = data.filter(treasure => {
-    return treasure.name.toLowerCase().includes(searchableItem) || treasure.description.toLowerCase().includes(searchableItem);
-  });
+  // const matchingResults = data.filter(treasure => {
+  //   return treasure.name.toLowerCase().includes(searchableItem) || treasure.description.toLowerCase().includes(searchableItem);
+  // });
   
-  return matchingResults;
+  // return matchingResults;
+
+  axios.post(`http://localhost:3001/donations/search/${item}`)
+  .then((results) => {
+    console.log("results of db query:", results);
+    return results;
+  })
   
 };
 
@@ -72,7 +79,25 @@ const searchButtonClicked = (form, previousResults) => {
 
   // handles item search
   if (form.item) {
-    const results = searchDB(previousResults, form.item);
+    // const results = searchDB(previousResults, form.item);
+    const results = axios.post(`http://localhost:3001/donations/search/`, `name=${form.item}`)
+    .then((results) => {
+      return results.data;
+    }).catch((error) => {
+      return console.log("Error occured in item search:", error)
+    })
+
+    return results;
+  }
+
+  if (!form.item && !form.location) {
+    const results = axios.post(`http://localhost:3001/donations/search/`)
+    .then((results) => {
+      return results.data;
+    }).catch((error) => {
+      return console.log("Error occured in item search:", error)
+    })
+
     return results;
   }
 
