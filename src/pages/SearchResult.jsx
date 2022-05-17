@@ -16,6 +16,7 @@ const SearchResult = () => {
 
   const updateStateFromSearch = data => {
     setResults(prev => ({...prev, listData: data}));
+    console.log("## State changed in Search Results page");
   }
 
   useEffect(() => {
@@ -33,10 +34,10 @@ const SearchResult = () => {
 
   return(
     <div>
-      <SearchHeader onChange={(event) => updateStateFromSearch(event)} resultState={results.listData}/>
-      <SearchResultMap listData={results.listData} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected}/>
-      <ResultList listData={results.listData} selected={selected} setModal={setModal}/>
-      <DetailsModal listData={results.listData} modal={modal} setModal={setModal}/>
+      <SearchHeader onChange={(event) => updateStateFromSearch(event)} resultState={results?.listData || []}/>
+      <SearchResultMap listData={results?.listData || []} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected}/>
+      <ResultList listData={results?.listData || []} selected={selected} setModal={setModal}/>
+      <DetailsModal listData={results?.listData || []} modal={modal} setModal={setModal}/>
 
     </div>
   )

@@ -12,10 +12,12 @@ const HomeHeader = (props) => {
     item: null
   });
 
+  // handles location text in Search bar
   const handleLocationInputChanged = e => {
     setSearch(prev => ({...prev, location: e}));
   }
 
+  // handles item text in Search bar
   const handleItemInputChanged = e => {
     setSearch(prev => ({...prev, item: e}));
   }
@@ -23,9 +25,12 @@ const HomeHeader = (props) => {
   const handleSearch = () => {
     const previousResults = props.resultState;
 
-    const results = searchButtonClicked(search, previousResults) || previousResults;
-    
-    props.onChange(results);
+    // async function - updates state in Search Results page
+    searchButtonClicked(search, previousResults).then((data) => {
+      console.log("## data", data);
+      props.onChange(data);
+    });
+
   }
 
   return(
