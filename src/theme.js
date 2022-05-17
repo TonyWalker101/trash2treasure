@@ -73,6 +73,11 @@ const theme = createTheme({
       fontFamily: ['Poppins', 'sans-serif'].join(","), 
       fontSize: 14,
       color: "#bd372d"
+    }, 
+    congratsText: {
+      fontWeight: "regular", 
+      fontFamily: ['Poppins', 'sans-serif'].join(","), 
+      fontSize: 22
     }
   }
 });

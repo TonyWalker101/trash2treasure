@@ -6,7 +6,7 @@ import { getUserNameByCommentId } from "../../helpers/selector";
 
 
 const CommentSection = (props) => {
-  const length = props.comments.length;
+  const length = props.comments? props.comments.length : 0;
   const commentTag  = () => {
     if (length === 0 || length === 1) {
       return length + " comment";

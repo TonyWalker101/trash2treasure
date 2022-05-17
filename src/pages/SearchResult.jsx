@@ -6,6 +6,7 @@ import "../stylesheet/SearchResult.css";
 import DetailsModal from "../components/SearchResult/DetailsModal";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import CongratsModal from "../components/SearchResult/ComgratsModal";
 
 
 const SearchResult = () => {
@@ -13,7 +14,7 @@ const SearchResult = () => {
   const [selected, setSelected] = useState(null);
   const [modal, setModal] = useState(null);
   const [results, setResults] = useState({comments: [], listData: [], users: []});
-
+  const [congrats, setCongrats] = useState(false);
 
   useEffect(() => {
     Promise.all([
@@ -34,8 +35,10 @@ const SearchResult = () => {
       <SearchHeader />
       <SearchResultMap listData={results.listData} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected}/>
       <ResultList listData={results.listData} selected={selected} setModal={setModal}/>
-      <DetailsModal listData={results.listData} modal={modal} setModal={setModal} users={results.users} comments={results.comments} setResults={setResults}/>
-
+      {congrats && 
+          <CongratsModal congrats={congrats} setCongrats={setCongrats} setModal={setModal}/>
+      }
+      <DetailsModal listData={results.listData} modal={modal} setModal={setModal} users={results.users} comments={results.comments} setResults={setResults} setCongrats={setCongrats}/>
     </div>
   )
 }

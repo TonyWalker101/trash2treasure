@@ -87,7 +87,7 @@ const DetailsModal = (props) => {
                   
                   
                   {(claim === null)?
-                      <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="claim-button" color="primary" onClick={() => setClaim(props.modal)} sx={{mt: 1}}>Claim</Button>
+                      <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="claim-button" color="primary" onClick={(e) => {e.preventDefault(); setClaim(props.modal)}} sx={{mt: 1}}>Claim</Button>
                 
                   :(
                       <div className="confirm-container">
@@ -95,7 +95,7 @@ const DetailsModal = (props) => {
                         <div className="confirm-button-group">
                           <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="primary" onClick={() => setClaim(null)}>Cancel</Button>
         
-                          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="secondary" onClick={() => setClaim(null)}>Confirm</Button>
+                          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="secondary" onClick={() => { props.setModal(null); props.setCongrats(true);}}>Confirm</Button>
                         </div>
                     </div>
                   )}
