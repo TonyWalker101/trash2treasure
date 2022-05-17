@@ -16,6 +16,11 @@ const SearchResult = () => {
   const [results, setResults] = useState({comments: [], listData: [], users: []});
   const [congrats, setCongrats] = useState(false);
 
+  const updateStateFromSearch = data => {
+    setResults(prev => ({...prev, listData: data}));
+    console.log("## State changed in Search Results page");
+  }
+
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:3001/"),
@@ -32,13 +37,14 @@ const SearchResult = () => {
 
   return(
     <div>
-      <SearchHeader />
-      <SearchResultMap listData={results.listData} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected}/>
-      <ResultList listData={results.listData} selected={selected} setModal={setModal}/>
+      <SearchHeader onChange={(event) => updateStateFromSearch(event)} resultState={results?.listData || []}/>
+      <SearchResultMap listData={results?.listData || []} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected}/>
+      <ResultList listData={results?.listData || []} selected={selected} setModal={setModal}/>
       {congrats && 
         <CongratsModal congrats={congrats} setCongrats={setCongrats} setModal={setModal}/>
       }
-      <DetailsModal listData={results.listData} modal={modal} setModal={setModal} users={results.users} comments={results.comments} setResults={setResults} setCongrats={setCongrats}/>
+      <DetailsModal listData={results?.listData || []} modal={modal} setModal={setModal} users={results.users} comments={results.comments} setResults={setResults} setCongrats={setCongrats}/>
+      
     </div>
   )
 }
