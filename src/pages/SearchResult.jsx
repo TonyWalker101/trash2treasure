@@ -36,7 +36,7 @@ const SearchResult = () => {
       <SearchResultMap listData={results.listData} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected}/>
       <ResultList listData={results.listData} selected={selected} setModal={setModal}/>
       {congrats && 
-          <CongratsModal congrats={congrats} setCongrats={setCongrats} setModal={setModal}/>
+        <CongratsModal congrats={congrats} setCongrats={setCongrats} setModal={setModal}/>
       }
       <DetailsModal listData={results.listData} modal={modal} setModal={setModal} users={results.users} comments={results.comments} setResults={setResults} setCongrats={setCongrats}/>
     </div>

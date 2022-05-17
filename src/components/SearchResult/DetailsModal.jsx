@@ -13,6 +13,7 @@ const DetailsModal = (props) => {
   const [claim, setClaim] = useState(null);
   const [comment, setComment] = useState({comment: '', donation_id: null});
   const [submitError, setSubmitError] = useState(false);
+
   const textInput = React.useRef(null);
 
 
@@ -46,8 +47,21 @@ const DetailsModal = (props) => {
           })))
       })
       .catch((error) => console.log(`Error loading API data. Error: ${error}`))
-    }
-    
+    } 
+  }
+
+  const onConfirm = () => {
+    Promise.all([
+      axios.post("http://localhost:3001/claim-donation", {id: props.modal})
+    ]).then(()=>{
+      Promise.all([
+        axios.get("http://localhost:3001/")
+      ]).then((all) => props.setResults(
+        prev => ({...prev,
+          listData:all[0].data
+        })))
+    })
+    .catch((error) => console.log(`Error loading API data. Error: ${error}`))
   }
 
   return(
@@ -95,13 +109,11 @@ const DetailsModal = (props) => {
                         <div className="confirm-button-group">
                           <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="primary" onClick={() => setClaim(null)}>Cancel</Button>
         
-                          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="secondary" onClick={() => { props.setModal(null); props.setCongrats(true);}}>Confirm</Button>
+                          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="secondary" onClick={() => { props.setModal(null); props.setCongrats(true); onConfirm();
+                          }}>Confirm</Button>
                         </div>
                     </div>
                   )}
-                  
-                  
-                  
               </div>
             </div>
           </div>
