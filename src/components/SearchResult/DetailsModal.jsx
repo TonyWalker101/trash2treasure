@@ -4,14 +4,17 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme';
 import ReactTimeAgo from 'react-time-ago'
 import { Typography } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CommentSection from "./CommentSection";
 import axios from "axios";
+import React from "react";
 
 const DetailsModal = (props) => {
   const [claim, setClaim] = useState(null);
   const [comment, setComment] = useState({comment: '', donation_id: null});
   const [submitError, setSubmitError] = useState(false);
+  const textInput = React.useRef(null);
+
 
   const selectedData = getDataById(props.listData, props.modal)[0]
 
@@ -26,7 +29,6 @@ const DetailsModal = (props) => {
 
   const comments = getCommentsByItemId(props.comments, props.modal);
 
-  console.log(comment);
   
   const onSubmit = () => {
     if (comment.comment === "") {
@@ -35,9 +37,17 @@ const DetailsModal = (props) => {
       setSubmitError(false);
       Promise.all([
         axios.post('http://localhost:3001/add-comment', comment)
-      ])
-      .catch((error) => console.log(`Error loading API data. Error: ${error}`));
+      ]).then(()=>{
+        Promise.all([
+          axios.get("http://localhost:3001/comments")
+        ]).then((all) => props.setResults(
+          prev => ({...prev,
+            comments:all[0].data
+          })))
+      })
+      .catch((error) => console.log(`Error loading API data. Error: ${error}`))
     }
+    
   }
 
   return(
@@ -106,12 +116,13 @@ const DetailsModal = (props) => {
               label="Add a comment"
               multiline
               minRows={4}
+              inputRef={textInput}
               sx={{mt: 5}}
               onChange={e => {setComment({...comment, comment: e.target.value, donation_id: props.modal})}}
               />
             <div id="comment-button-container">
               <div id="comment-button-layout">
-              <Button variant="contained" fontWeight="fontWeightRegular" disableElevation id="comment-button" color="primary" sx={{mt: 5}} onClick={e => {e.preventDefault(); onSubmit()}}>Submit</Button>
+              <Button variant="contained" fontWeight="fontWeightRegular" disableElevation id="comment-button" color="primary" sx={{mt: 5}} onClick={e => {e.preventDefault(); onSubmit(); textInput.current.value = "";}}>Submit</Button>
 
               </div>
               {submitError &&
