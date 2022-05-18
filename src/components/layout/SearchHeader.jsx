@@ -23,11 +23,10 @@ const HomeHeader = (props) => {
   }
 
   const handleSearch = () => {
-    const previousResults = props.resultState;
 
     // async function - updates state in Search Results page
-    searchButtonClicked(search, previousResults).then((data) => {
-      console.log("## data", data);
+    searchButtonClicked(search).then((data) => {
+      // console.log("## data in search button click:", data);
       props.onChange(data);
     });
 
