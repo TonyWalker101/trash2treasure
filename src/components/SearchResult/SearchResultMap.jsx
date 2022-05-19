@@ -11,11 +11,6 @@ const containerStyle = {
   height: '91vh'
 };
 
-const center = {
-  lat: 43.6532,
-  lng: -79.3832
-};
-
 const SearchResultMap = (props) => {
 
   const { isLoaded, loadError } = useJsApiLoader({
@@ -26,7 +21,7 @@ const SearchResultMap = (props) => {
   const [map, setMap] = React.useState(null)
 
   const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds(center);
+    const bounds = new window.google.maps.LatLngBounds(props.center);
     map.fitBounds(bounds);
     setMap(map)
   }, [])
@@ -57,7 +52,7 @@ const SearchResultMap = (props) => {
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
-      center={center}
+      center={props.center}
       zoom={13}
       onUnmount={onUnmount}
       options={options}
