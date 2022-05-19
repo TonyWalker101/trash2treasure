@@ -80,7 +80,7 @@ const AddNewForm = (props) => {
       <ThemeProvider theme={theme}>
         <Typography variant="title" id="add-new-title" sx={{mb: 5}}>Add A Treasure</Typography>
 
-        <form id="add-new-form">
+        <form id="add-new-form"  autocomplete="off">
           <TextField id="outlined-basic" label="Title" variant="outlined" onChange={(e) => setForm(prev => ({...prev, name: e.target.value}))}/>
           <div className='search-container'>
             <TextField id="outlined-basic" label="Location" variant="outlined" sx={{width: "100%"}} onChange={(e) => setForm(prev => ({...prev, location: e.target.value}))}/>

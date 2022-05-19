@@ -9,12 +9,13 @@ const HomeSearchBar = (props) => {
   const routeChange = () =>{ 
     navigate(`/search-result`);
   }
+
   return(
     <div className="index-search-container">
-      <form className="index-search-bar" id="index-search">
+      <form className="index-search-bar" id="index-search"  autocomplete="off">
           <ThemeProvider theme={theme}>
           
-          <TextField id="filled-basic" label="Search by location" variant="filled" size="small"   InputProps={{ disableUnderline: true}} onChange={(e) => {props.setIndexSearch({...props.indexSearch, location: e.target.value})}}/>
+          <TextField id="filled-basic" label="Search by location" variant="filled" size="small"   InputProps={{ disableUnderline: true }} onChange={(e) => {props.setIndexSearch({...props.indexSearch, location: e.target.value})}}/>
           <div className="index-vl"></div>
 
           <TextField id="filled-basic" label="Search by item" variant="filled" size="small" InputProps={{ disableUnderline: true }} onChange={(e) => {props.setIndexSearch({...props.indexSearch, item: e.target.value})}}/>

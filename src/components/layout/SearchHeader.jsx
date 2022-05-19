@@ -45,7 +45,7 @@ const HomeHeader = (props) => {
         </ThemeProvider>
       </nav>
         
-        <form className="header-search-bar">
+        <form className="header-search-bar"  autocomplete="off">
           <ThemeProvider theme={theme}>
           
           <TextField id="filled-basic" label="Search by location" variant="filled" size="small" defaultValue={props.indexSearch.location ? props.indexSearch.location : ""}  InputProps={{ disableUnderline: true}} onChange={(event) => handleLocationInputChanged(event.target.value)}/>
