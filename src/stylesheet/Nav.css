@@ -37,7 +37,7 @@ footer {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
 }
 
@@ -84,6 +84,7 @@ footer {
   border-left: 1px solid #2d2d2d;
   height: 35px;
   margin: 0 10px;
+  margin-left: 50px;
 }
 
 .search-button {
@@ -95,4 +96,8 @@ footer {
 
 #filled-basic {
   background-color: #fff !important;
+}
+
+#header-logo {
+  z-index: 99;
 }

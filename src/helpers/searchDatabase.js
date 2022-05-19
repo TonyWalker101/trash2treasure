@@ -2,6 +2,7 @@ import Geocode from "react-geocode"
 import listData from "../__mocks__/list";
 import axios from "axios";
 
+
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
 Geocode.setLanguage("en");
@@ -12,6 +13,7 @@ const getGeocode = location => {
   .then(
     (response) => {
       const { lat, lng } = response.results[0].geometry.location;
+
       const searchData = {};
       searchData.geocode = [lat, lng];
       searchData.results = searchDBWithGeocode(searchData.geocode)
@@ -79,12 +81,14 @@ const searchButtonClicked = (form, previousResults) => {
     }
 
     // console.log("after async in search button clicked:", results);
+
     return results;
 
   }
 
   // handles item search
   if (form.item) {
+
     // const results = searchDB(previousResults, form.item);
     const results = axios.post(`http://localhost:3001/donations/search/`, `name=${form.item}`)
     .then((e) => {

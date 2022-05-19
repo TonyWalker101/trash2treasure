@@ -13,6 +13,7 @@ const SearchResult = () => {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
   const [modal, setModal] = useState(null);
+
   const [results, setResults] = useState({comments: [], listData: [], users: [], center: {lat: 43.6532, lng: -79.3832}});
   const [congrats, setCongrats] = useState(false);
 
@@ -26,6 +27,7 @@ const SearchResult = () => {
       }
     ));
     // console.log("## State changed in Search Results page:", data);
+
   }
 
   useEffect(() => {
@@ -44,8 +46,10 @@ const SearchResult = () => {
 
   return(
     <div>
+
       <SearchHeader onChange={(data) => updateStateFromSearch(data)} resultState={results?.listData || []}/>
       <SearchResultMap listData={results?.listData || []} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected} center={results.center}/>
+
       <ResultList listData={results?.listData || []} selected={selected} setModal={setModal}/>
       {congrats && 
         <CongratsModal congrats={congrats} setCongrats={setCongrats} setModal={setModal}/>
