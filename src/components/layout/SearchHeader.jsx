@@ -3,15 +3,16 @@ import Button from '@mui/material/Button';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme';
 import searchButtonClicked from '../../helpers/searchDatabase';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const HomeHeader = (props) => {
 
   const [search, setSearch] = useState({
-    location: null,
-    item: null
+    location: props.indexSearch.location,
+    item: props.indexSearch.item
   });
-
+  console.log(search);
+  
   // handles location text in Search bar
   const handleLocationInputChanged = e => {
     setSearch(prev => ({...prev, location: e}));
@@ -29,10 +30,11 @@ const HomeHeader = (props) => {
       // console.log("## data in search button click:", data);
 
       props.onChange(data);
+      // props.setFilteredListData(data);
     });
-
   }
-
+  useEffect(()=>{handleSearch()},[]);
+  
   return(
     <header>
       <nav id="search-nav">

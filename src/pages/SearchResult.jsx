@@ -7,9 +7,10 @@ import DetailsModal from "../components/SearchResult/DetailsModal";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CongratsModal from "../components/SearchResult/ComgratsModal";
+import { getThemeProps } from "@mui/system";
 
 
-const SearchResult = () => {
+const SearchResult = (props) => {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
   const [modal, setModal] = useState(null);
@@ -47,7 +48,7 @@ const SearchResult = () => {
   return(
     <div>
 
-      <SearchHeader onChange={(data) => updateStateFromSearch(data)} resultState={results?.listData || []}/>
+      <SearchHeader indexSearch={props.indexSearch} setIndexSearch={props.setIndexSearch} onChange={(data) => updateStateFromSearch(data)} resultState={results?.listData || []}/>
       <SearchResultMap listData={results?.listData || []} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected} center={results.center}/>
 
       <ResultList listData={results?.listData || []} selected={selected} setModal={setModal}/>

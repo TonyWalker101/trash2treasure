@@ -9,14 +9,8 @@ import AboutUs from "../components/Home/AboutUs";
 import HowItWorks from "../components/Home/HowItWorks";
 import axios from "axios";
 
-const Home = () => {
-
+const Home = (props) => {
   const [results, setResults] = useState({comments: [], listData: [], users: []});
-
-  const updateStateFromSearch = data => {
-    setResults(prev => ({...prev, listData: data}));
-    console.log("## State changed in Search Results page");
-  }
 
   useEffect(() => {
     Promise.all([
@@ -35,7 +29,7 @@ const Home = () => {
   return(
     <Fragment>
       <HomeHeader />
-      <HomeSearchBar onChange={(event) => updateStateFromSearch(event)} resultState={results?.listData || []}/>
+      <HomeSearchBar setIndexSearch={props.setIndexSearch} indexSearch={props.indexSearch} />
       <AboutUs />
       <HowItWorks />
       <Footer />
