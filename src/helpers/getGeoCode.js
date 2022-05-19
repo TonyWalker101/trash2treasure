@@ -2,6 +2,7 @@ import Geocode from "react-geocode"
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("en");
+Geocode.setRegion("ca");
 
 const getGeocode = location => {
 
