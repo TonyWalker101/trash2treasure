@@ -48,10 +48,10 @@ const HomeHeader = (props) => {
         <form className="header-search-bar">
           <ThemeProvider theme={theme}>
           
-          <TextField id="filled-basic" label="Search by location" variant="filled" size="small"   InputProps={{ disableUnderline: true}} onChange={(event) => handleLocationInputChanged(event.target.value)}/>
+          <TextField id="filled-basic" label="Search by location" variant="filled" size="small" defaultValue={props.indexSearch.location ? props.indexSearch.location : ""}  InputProps={{ disableUnderline: true}} onChange={(event) => handleLocationInputChanged(event.target.value)}/>
           <div className="vl"></div>
 
-          <TextField id="filled-basic" label="Search by item" variant="filled" size="small" InputProps={{ disableUnderline: true }} onChange={(event) => handleItemInputChanged(event.target.value)}/>
+          <TextField id="filled-basic" label="Search by item" variant="filled" size="small" defaultValue={props.indexSearch.item ? props.indexSearch.item : ""} InputProps={{ disableUnderline: true }} onChange={(event) => handleItemInputChanged(event.target.value)} />
 
             <Button variant="contained" disableElevation color="primary" className="search-button" sx={{ borderRadius: 8 }} onClick={handleSearch} ><i className="fa-solid fa-magnifying-glass fa-xl"></i></Button>
           </ThemeProvider>
