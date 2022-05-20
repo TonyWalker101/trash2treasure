@@ -50,7 +50,7 @@ const searchButtonClicked = form => {
   if (form.location!=="") {
 
 
-  else if (form.location) {
+    if (form.location) {
     console.log("Hello from location search!");
 
     const results = Promise.all([
@@ -74,53 +74,55 @@ const searchButtonClicked = form => {
     
     return results;
 
-  }
+    }
 
   // handles item search
-  if (form.item!=="") {
-    
-  else if (form.item) {
-    console.log("Hello from the item search!");
-    const results = axios.post(`http://localhost:3001/donations/search/`, `name=${form.item}`)
-    .then((e) => {
-      const searchData = {geocode:[]};
+    if (form.item!=="") {
+      
+      if (form.item) {
+      console.log("Hello from the item search!");
+      const results = axios.post(`http://localhost:3001/donations/search/`, `name=${form.item}`)
+      .then((e) => {
+        const searchData = {geocode:[]};
 
-      if (e.data[0]) {
-        searchData.geocode = [e.data[0].latitude*1, e.data[0].longitude*1]
-      }
-      searchData.results = e.data;
-      return searchData;
-    }).catch((error) => {
-      console.log("Error occured in item search! But was caught ;)", error)
-      const results = {
-        geocode: [43.6532, -79.3832],
-        results : null
-      }
+        if (e.data[0]) {
+          searchData.geocode = [e.data[0].latitude*1, e.data[0].longitude*1]
+        }
+        searchData.results = e.data;
+        return searchData;
+      }).catch((error) => {
+        console.log("Error occured in item search! But was caught ;)", error)
+        const results = {
+          geocode: [43.6532, -79.3832],
+          results : null
+        }
+        return results;
+      })
+
       return results;
-    })
+    }
 
-    return results;
-  }
+    if (form.item==="" && form.location==="") {
 
-  if (form.item==="" && form.location==="") {
+      const results = axios.post(`http://localhost:3001/donations/search/`)
+      .then((e) => {
+        const searchData = {geocode:[]};
+        searchData.results = e.data;
+        return searchData;
+      }).catch((error) => {
+        console.log("Error occured in empty item search! But was caught ;) ", error)
+        const results = {
+          geocode: [43.6532, -79.3832],
+          results : null
+        }
+        return results;
+      })
 
-    const results = axios.post(`http://localhost:3001/donations/search/`)
-    .then((e) => {
-      const searchData = {geocode:[]};
-      searchData.results = e.data;
-      return searchData;
-    }).catch((error) => {
-      console.log("Error occured in empty item search! But was caught ;) ", error)
-      const results = {
-        geocode: [43.6532, -79.3832],
-        results : null
-      }
       return results;
-    })
+    }
 
-    return results;
+    };
   }
-
-};
+}
 
 export default searchButtonClicked;
