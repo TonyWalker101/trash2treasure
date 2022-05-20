@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CongratsModal from "../components/SearchResult/ComgratsModal";
 import Empty from "../components/SearchResult/Empty";
+import Loading from "../components/SearchResult/Loading";
 
 
 const SearchResult = (props) => {
@@ -17,6 +18,7 @@ const SearchResult = (props) => {
 
   const [results, setResults] = useState({comments: [], listData: [], users: [], center: {lat: 43.6532, lng: -79.3832}});
   const [congrats, setCongrats] = useState(false);
+  const [loading, setLoading] = useState(true)
 
   const updateStateFromSearch = data => {
     setResults(prev => (
@@ -27,11 +29,18 @@ const SearchResult = (props) => {
         lng: data.geocode[1] || -79.3832}
       }
     ));
-    // console.log("## State changed in Search Results page:", data);
-
   }
 
+  //set loading page
+  const timeId = setTimeout(() => {
+    // After 3 seconds set the show value to false
+    setLoading(false)
+  }, 1000)
+
   useEffect(() => {
+    //show loading page for 1s
+    clearTimeout(timeId)
+
     if(props.indexSearch.location!==""||props.indexSearch.item!==""){
       return
     }
@@ -56,6 +65,7 @@ const SearchResult = (props) => {
       <SearchHeader indexSearch={props.indexSearch} setIndexSearch={props.setIndexSearch} onChange={(data) => updateStateFromSearch(data)} resultState={results?.listData || []}/>
       <SearchResultMap listData={results?.listData || []} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected} center={results.center}/>
 
+      {loading && <Loading />}
       {results.listData.length !== 0 ?
         <ResultList listData={results?.listData || []} selected={selected} setModal={setModal}/>
         :
