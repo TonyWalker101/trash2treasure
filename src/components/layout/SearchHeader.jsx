@@ -16,9 +16,13 @@ const HomeHeader = (props) => {
     location: props.indexSearch.location ? props.indexSearch.location : "", 
     item: props.indexSearch.item ? props.indexSearch.item : ""
   })
+  
   const handleSearch = () => {
-    setSearch(placeHolder)
+    props.setLoading(true);
+
+    setSearch(placeHolder);
     // async function - updates state in Search Results page
+
     searchButtonClicked(search).then((data) => {
       // console.log("!!!!!"+search.item);
       // console.log("## data in search button click:", data);

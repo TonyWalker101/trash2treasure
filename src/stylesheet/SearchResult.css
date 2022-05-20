@@ -264,3 +264,22 @@
   margin-top: -70px;
   text-align: center;
 }
+
+/* Loading */
+#loading-container {
+  width: 50vw;
+  height: 91vh; 
+  position: absolute;
+  top: 86px;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  z-index: 99;
+}
+
+#loading_img {
+  margin: auto auto;
+  width: 200px;
+  height: auto;
+}
