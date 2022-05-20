@@ -40,7 +40,6 @@ const HomeSearchBar = (props) => {
           }
           </ThemeProvider>
     </div>
-    
   )
 }
 
