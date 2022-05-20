@@ -7,7 +7,7 @@ import Home from "./pages/Home"
 import { useState } from 'react';
 
 function App() {
-  const [indexSearch, setIndexSearch] = useState({location: null, item: null})
+  const [indexSearch, setIndexSearch] = useState({location: "", item: ""})
 
   return (
     <div>

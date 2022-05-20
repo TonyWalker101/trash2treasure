@@ -19,16 +19,16 @@ const HomeHeader = (props) => {
   
   // handles location text in Search bar
   const handleLocationInputChanged = e => {
-    setSearch(prev => ({...prev, location: e}));
+    setPlaceHolder(prev => ({...prev, location: e}));
   }
 
   // handles item text in Search bar
   const handleItemInputChanged = e => {
-    setSearch(prev => ({...prev, item: e}));
+    setPlaceHolder(prev => ({...prev, item: e}));
   }
 
   const handleSearch = () => {
-
+    setSearch(placeHolder)
     // async function - updates state in Search Results page
     searchButtonClicked(search).then((data) => {
       // console.log("## data in search button click:", data);
@@ -38,7 +38,7 @@ const HomeHeader = (props) => {
       console.log("triggered");
     });
   }
-  useEffect(()=>{handleSearch()},[]);
+  useEffect(()=>{handleSearch()},[search]);
   
   const onClear = () => {
     setPlaceHolder({location: "",
@@ -63,7 +63,7 @@ const HomeHeader = (props) => {
 
           <TextField id="filled-basic" label="Search by item" variant="filled" size="small" defaultValue={placeHolder.item} InputProps={{ disableUnderline: true }} onChange={(event) => handleItemInputChanged(event.target.value)} />
 
-            <Button variant="contained" disableElevation color="primary" className="search-button" sx={{ borderRadius: 8 }} onClick={e => {e.preventDefault(); handleSearch();}} ><i className="fa-solid fa-magnifying-glass fa-xl"></i></Button>
+            <Button variant="contained" disableElevation color="primary" className="search-button" sx={{ borderRadius: 8 }} type="submit" onClick={e => {e.preventDefault(); handleSearch();}} ><i className="fa-solid fa-magnifying-glass fa-xl"></i></Button>
             <button className="clear-button" onClick={onClear}><i class="fa-solid fa-xmark fa-xl"></i></button>
           </ThemeProvider>
         </form>

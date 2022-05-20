@@ -31,7 +31,7 @@ const HomeSearchBar = (props) => {
 
           <TextField id="filled-basic" label="Search by item" variant="filled" size="small" InputProps={{ disableUnderline: true }} onChange={(e) => {props.setIndexSearch({...props.indexSearch, item: e.target.value})}}/>
 
-            <Button variant="contained" disableElevation color="primary" className="index-search-button" sx={{ borderRadius: 8 }}  onClick={onSubmit}><i className="fa-solid fa-magnifying-glass fa-xl"></i></Button>
+            <Button variant="contained" disableElevation color="primary" className='index-search-button' type="submit" sx={{ borderRadius: 8 }}  onClick={onSubmit}><i className="fa-solid fa-magnifying-glass fa-xl"></i></Button>
         </form>
           {submitError &&
             <div id="home-error-container">
