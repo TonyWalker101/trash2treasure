@@ -55,7 +55,7 @@ footer {
   margin-top: -50px;
 }
 
-/* --------------------- FOOTER --------------------- */
+/* --------------------- Search Bar--------------------- */
 
 #search-page-logo {
   margin-left: 25px;
@@ -91,7 +91,7 @@ footer {
   height: 53px;
   width: 50px;
   position: absolute;
-  right: -31px;
+  right: -87px;
 }
 
 #filled-basic {
@@ -100,4 +100,12 @@ footer {
 
 #header-logo {
   z-index: 99;
+}
+
+.clear-button {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0);
+  color: lightgray;
+  border: none;
+  margin-right: 30px;
 }
