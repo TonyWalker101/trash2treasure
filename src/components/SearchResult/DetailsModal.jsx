@@ -78,7 +78,7 @@ const DetailsModal = (props) => {
         <div className="modal-container">
           <div className="item-info-container">
             <div className="button-container">
-              <button onClick={()=>{props.setModal(null); setClaim(null)}} className="close-button"><i class="fa-solid fa-xmark fa-2xl"></i></button>
+              <button onClick={()=>{props.setModal(null); setClaim(null);}} className="close-button"><i class="fa-solid fa-xmark fa-2xl"></i></button>
             </div>
 
             <div className="details-container">
@@ -101,7 +101,7 @@ const DetailsModal = (props) => {
                   
                   
                   {(claim === null)?
-                      <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="claim-button" color="primary" onClick={(e) => {e.preventDefault(); setClaim(props.modal)}} sx={{mt: 1}}>Claim</Button>
+                      <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="claim-button" color="primary" onClick={(e) => {e.preventDefault(); setClaim(props.modal); console.log(claim);}} sx={{mt: 1}}>Claim</Button>
                 
                   :(
                       <div className="confirm-container">
