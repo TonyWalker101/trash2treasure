@@ -69,7 +69,7 @@ const AddNewForm = (props) => {
       <ThemeProvider theme={theme}>
         <Typography variant="title" id="add-new-title" sx={{mb: 5}}>Add A Treasure</Typography>
 
-        <form id="add-new-form">
+        <form id="add-new-form"  autocomplete="off">
           <TextField id="outlined-basic" label="Title" variant="outlined" onChange={(e) => setForm(prev => ({...prev, name: e.target.value}))}/>
           <div className='search-container'>
             <TextField id="outlined-basic" label="Location" variant="outlined" sx={{width: "100%"}} value={setValue()} onChange={(e) => setForm(prev => ({...prev, location: e.target.value}))}/>
@@ -108,7 +108,7 @@ const AddNewForm = (props) => {
           <Typography variant="helper" sx={{mt: -3}}>Please upload a jpep, jpg or png file</Typography>
 
 
-          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" sx={{mt: 5, width: "100%"}} onClick={onFormSubmit}>Submit</Button>
+          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" type="submit" sx={{mt: 5, width: "100%"}} onClick={onFormSubmit}>Submit</Button>
         </form>
       </ThemeProvider>
     </div>

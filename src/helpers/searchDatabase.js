@@ -47,6 +47,8 @@ const searchButtonClicked = form => {
   }
 
   // handles location search
+  if (form.location!=="") {
+
 
   else if (form.location) {
     console.log("Hello from location search!");
@@ -75,7 +77,8 @@ const searchButtonClicked = form => {
   }
 
   // handles item search
-
+  if (form.item!=="") {
+    
   else if (form.item) {
     console.log("Hello from the item search!");
     const results = axios.post(`http://localhost:3001/donations/search/`, `name=${form.item}`)
@@ -99,10 +102,8 @@ const searchButtonClicked = form => {
     return results;
   }
 
-  // handles no search results provided
+  if (form.item==="" && form.location==="") {
 
-  else {
-    console.log("Hello from blank search :3")
     const results = axios.post(`http://localhost:3001/donations/search/`)
     .then((e) => {
       const searchData = {geocode:[]};

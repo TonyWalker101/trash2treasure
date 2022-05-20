@@ -1,7 +1,6 @@
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme';
-import { TextField, Typography } from '@mui/material';
-import Button from '@mui/material/Button';
+import {  Typography } from '@mui/material';
 
 const AboutUs = () => {
   return(

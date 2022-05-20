@@ -3,34 +3,47 @@ import Button from '@mui/material/Button';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme';
 import searchButtonClicked from '../../helpers/searchDatabase';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const HomeHeader = (props) => {
 
   const [search, setSearch] = useState({
-    location: null,
-    item: null
+    location: props.indexSearch.location,
+    item: props.indexSearch.item
   });
+  
+  const [placeHolder, setPlaceHolder] = useState({
+    location: props.indexSearch.location ? props.indexSearch.location : "", 
+    item: props.indexSearch.item ? props.indexSearch.item : ""
+  })
+  const handleSearch = () => {
+    setSearch(placeHolder)
+    // async function - updates state in Search Results page
+    searchButtonClicked(search).then((data) => {
+      // console.log("!!!!!"+search.item);
+      // console.log("## data in search button click:", data);
 
+      props.onChange(data);
+      // props.setFilteredListData(data);
+    });
+  }
+  
+  useEffect(()=>{handleSearch()},[search]);
   // handles location text in Search bar
   const handleLocationInputChanged = e => {
-    setSearch(prev => ({...prev, location: e}));
+    setPlaceHolder(prev => ({...prev, location: e}));
   }
 
   // handles item text in Search bar
   const handleItemInputChanged = e => {
-    setSearch(prev => ({...prev, item: e}));
+    setPlaceHolder(prev => ({...prev, item: e}));
   }
 
-  const handleSearch = () => {
 
-    // async function - updates state in Search Results page
-    searchButtonClicked(search).then((data) => {
-      // console.log("## data in search button click:", data);
-
-      props.onChange(data);
-    });
-
+  
+  const onClear = () => {
+    setPlaceHolder({location: "",
+      item: ""})
   }
 
   return(
@@ -43,15 +56,16 @@ const HomeHeader = (props) => {
         </ThemeProvider>
       </nav>
         
-        <form className="header-search-bar">
+        <form className="header-search-bar"  autocomplete="off">
           <ThemeProvider theme={theme}>
           
-          <TextField id="filled-basic" label="Search by location" variant="filled" size="small"   InputProps={{ disableUnderline: true}} onChange={(event) => handleLocationInputChanged(event.target.value)}/>
+          <TextField id="filled-basic" label="Search by location" variant="filled" size="small" defaultValue={placeHolder.location}  InputProps={{ disableUnderline: true}} onChange={(event) => handleLocationInputChanged(event.target.value)}/>
           <div className="vl"></div>
 
-          <TextField id="filled-basic" label="Search by item" variant="filled" size="small" InputProps={{ disableUnderline: true }} onChange={(event) => handleItemInputChanged(event.target.value)}/>
+          <TextField id="filled-basic" label="Search by item" variant="filled" size="small" defaultValue={placeHolder.item} InputProps={{ disableUnderline: true }} onChange={(event) => handleItemInputChanged(event.target.value)} />
 
-            <Button variant="contained" disableElevation color="primary" className="search-button" sx={{ borderRadius: 8 }} onClick={handleSearch} ><i className="fa-solid fa-magnifying-glass fa-xl"></i></Button>
+            <Button variant="contained" disableElevation color="primary" className="search-button" sx={{ borderRadius: 8 }} onClick={e => {e.preventDefault(); handleSearch();}} ><i className="fa-solid fa-magnifying-glass fa-xl"></i></Button>
+            <button className="clear-button" onClick={onClear}><i class="fa-solid fa-xmark fa-xl"></i></button>
           </ThemeProvider>
         </form>
     </header>

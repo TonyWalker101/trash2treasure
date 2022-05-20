@@ -1,51 +1,44 @@
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme';
-import { TextField } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import { useState } from "react";
-import searchButtonClicked from '../../helpers/searchDatabase';
+import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
 
-const HomeSearchBar = () => {
+const HomeSearchBar = (props) => {
+  const [submitError, setSubmitError] = useState(false);
 
-  const [search, setSearch] = useState({
-    location: null,
-    item: null
-  });
-
-  // handles location text in Search bar
-  const handleLocationInputChanged = e => {
-    setSearch(prev => ({...prev, location: e}));
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    navigate(`/search-result`);
   }
 
-  // handles item text in Search bar
-  const handleItemInputChanged = e => {
-    setSearch(prev => ({...prev, item: e}));
-  }
-
-  const handleSearch = () => {
-    // const previousResults = props.resultState;
-
-    // async function - updates state in Search Results page
-    // searchButtonClicked(search, previousResults).then((data) => {
-    //   console.log("## data", data);
-    //   props.onChange(data);
-    // });
-
+  const onSubmit = () => {
+    if (props.indexSearch.location === "" && props.indexSearch.item === "") {
+      setSubmitError(true);
+    } else {
+      routeChange();
+    }
   }
 
   return(
     <div className="index-search-container">
-      <form className="index-search-bar" id="index-search">
-          <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+      <form className="index-search-bar" id="index-search"  autocomplete="off">
           
-          <TextField id="filled-basic" label="Search by location" variant="filled" size="small"   InputProps={{ disableUnderline: true}} onChange={(event) => handleLocationInputChanged(event.target.value)}/>
+          <TextField id="filled-basic" label="Search by location" variant="filled" size="small"   InputProps={{ disableUnderline: true }} onChange={(e) => {props.setIndexSearch({...props.indexSearch, location: e.target.value})}}/>
           <div className="index-vl"></div>
 
-          <TextField id="filled-basic" label="Search by item" variant="filled" size="small" InputProps={{ disableUnderline: true }} onChange={(event) => handleItemInputChanged(event.target.value)}/>
+          <TextField id="filled-basic" label="Search by item" variant="filled" size="small" InputProps={{ disableUnderline: true }} onChange={(e) => {props.setIndexSearch({...props.indexSearch, item: e.target.value})}}/>
 
-            <Button variant="contained" disableElevation color="primary" className="search-button" sx={{ borderRadius: 8 }} onClick={handleSearch} ><i className="fa-solid fa-magnifying-glass fa-xl"></i></Button>
-          </ThemeProvider>
+            <Button variant="contained" disableElevation color="primary" className='index-search-button'  sx={{ borderRadius: 8 }} onClick={onSubmit}><i className="fa-solid fa-magnifying-glass fa-xl"></i></Button>
         </form>
+          {submitError &&
+            <div id="home-error-container">
+              <Typography variant="errorText" align="right">* Please provide a location or an item name</Typography>
+            </div>
+          }
+          </ThemeProvider>
     </div>
     
   )
