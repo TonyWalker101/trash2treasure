@@ -55,7 +55,7 @@ const SearchResult = (props) => {
       {congrats && 
         <CongratsModal congrats={congrats} setCongrats={setCongrats} setModal={setModal}/>
       }
-      <DetailsModal listData={results?.listData || []} modal={modal} setModal={setModal} users={results.users} comments={results.comments} setResults={setResults} setCongrats={setCongrats}/>
+      <DetailsModal listData={results?.listData || []} modal={modal} setModal={setModal} users={results.users} comments={results.comments} setResults={setResults} setCongrats={setCongrats} setSelected={setSelected}/>
       
     </div>
   )

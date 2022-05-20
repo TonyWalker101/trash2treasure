@@ -109,7 +109,7 @@ const DetailsModal = (props) => {
                         <div className="confirm-button-group">
                           <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="primary" onClick={() => setClaim(null)}>Cancel</Button>
         
-                          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="secondary" onClick={() => { props.setModal(null); props.setCongrats(true); onConfirm();
+                          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="secondary" onClick={() => { props.setModal(null); props.setCongrats(true); onConfirm(); props.setSelected(null);
                           }}>Confirm</Button>
                         </div>
                     </div>
