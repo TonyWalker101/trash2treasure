@@ -212,6 +212,14 @@
 }
 
 /* Congrats Modal */
+.congrats-modal-container {
+  width: 70vw;
+  height: 80vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .congrats-container {
   width: 100%;
@@ -222,7 +230,7 @@
   align-items: center;
 }
 #congrats-gif {
-  width: 50vw;
+  width: 40vw;
   height: auto;
 }
 
