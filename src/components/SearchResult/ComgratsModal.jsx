@@ -30,14 +30,14 @@ const CongratsModal = (props) => {
       <>
       <ThemeProvider theme={theme}>
       
-        <div className="modal-container">
+        <div className="congrats-modal-container">
           <div className="congrats-container">
             <div className="button-container">
               <button onClick={()=>{props.setCongrats(false);}} className="close-button"><i class="fa-solid fa-xmark fa-2xl"></i></button>
             </div>
 
             <Typography variant="title" sx={{mb:2}}>Congratulations!</Typography>
-            <Typography variant="congratsText" sx={{mb:10}}>You've found your treasure!</Typography>
+            <Typography variant="congratsText" sx={{mb:6}}>You've found your treasure!</Typography>
             <img src="../images/congrats.gif" id="congrats-gif"/>
             <Typography variant="modalText">Redirecting to the results list in <b>{countDown} </b>seconds</Typography>
           </div>
