@@ -1,95 +1,86 @@
 import Geocode from "react-geocode"
-import listData from "../__mocks__/list";
 import axios from "axios";
+import getGeocode from "../helpers/getGeoCode";
 
+// config for Geocode package
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
-
 Geocode.setLanguage("en");
+Geocode.setRegion("ca");
 
-const getGeocode = location => {
+const searchButtonClicked = form => {
 
-  const results = Geocode.fromAddress(location)
-  .then(
-    (response) => {
-      const { lat, lng } = response.results[0].geometry.location;
+  // handles location + item search
 
-      const searchData = {};
-      searchData.geocode = [lat, lng];
-      searchData.results = searchDBWithGeocode(searchData.geocode)
-      // console.log("## results from inside getGeocode", searchData)
+  if (form.item && form.location) {
+    console.log("Hello from inside double search!");
+
+    const results = Promise.all([
+      axios.post(`http://localhost:3001/donations/search/`, `name=${form.item}&location=${form.location}`),
+      getGeocode(form.location)
+    ])
+    .then((e) => {
+      
+      const searchData = {geocode:[]};
+
+      console.log("e.data[0]", e[0].data)
+
+      if (e[0].data[0]) {
+        searchData.geocode = [e[0].data[0].latitude*1, e[0].data[0].longitude*1]
+      } else {
+        searchData.geocode = [e[1][0]*1, e[1][1]*1];
+      }
+
+      searchData.results = e[0].data;
       return searchData;
-    },
-    (error) => {
-      console.error("An error occured getting geocode! But was caught ;) ", error);
+
+    }).catch((error) => {
+      console.log("Error occured in item search! But was caught ;)", error)
       const results = {
         geocode: [43.6532, -79.3832],
         results : null
       }
       return results;
-    }
-  )
-  
-  // test.results = results;
-  console.log("## getgeocode returns:", results)
-  return results;
-}
-
-// const searchDB = (data, item) => {
-//   if (!item) {
-//     return;
-//   }
-
-//   axios.post(`http://localhost:3001/donations/search/${item}`)
-//   .then((results) => {
-//     console.log("results of db query:", results);
-//     return results;
-//   })
-  
-// };
-
-const searchDBWithGeocode = (geocode) => {
-
-  console.log("geocode array", geocode);
-
-  const data = listData;
-
-  const matchingResults = data.filter(treasure => {
-
-    return (geocode[0] - 0.2) <= (treasure.latitude * 1) && (treasure.latitude * 1) <= (geocode[0] + 0.2) && (geocode[1] - 0.2) <= (treasure.longitude * 1) && (treasure.longitude * 1) <= (geocode[1] + 0.2)
-  });
-
-  return matchingResults;
-
-};
-
-// Search button
-
-const searchButtonClicked = (form, previousResults) => {
+    })
+    
+    return results;
+  }
 
   // handles location search
   if (form.location!=="") {
 
-    const results = getGeocode(form.location)
-    .then(results => {
-      console.log("## results inside search B clicked:", results)
+
+  else if (form.location) {
+    console.log("Hello from location search!");
+
+    const results = Promise.all([
+      axios.post(`http://localhost:3001/donations/search/`, `location=${form.location}`),
+      getGeocode(form.location)
+    ])
+    .then((e) => {
+      const searchData = {geocode:[e[1][0]*1, e[1][1]*1]};
+      console.log("location response:", e[0])
+      searchData.results = e[0].data;
+      return searchData;
+
+    }).catch((error) => {
+      console.log("Error occured in item search! But was caught ;)", error)
+      const results = {
+        geocode: [43.6532, -79.3832],
+        results : null
+      }
       return results;
-    });
-
-    if (!results) {
-      
-    }
-
-    // console.log("after async in search button clicked:", results);
-
+    })
+    
     return results;
 
   }
 
   // handles item search
   if (form.item!=="") {
-
-    // const results = searchDB(previousResults, form.item);
+    
+  else if (form.item) {
+    console.log("Hello from the item search!");
     const results = axios.post(`http://localhost:3001/donations/search/`, `name=${form.item}`)
     .then((e) => {
       const searchData = {geocode:[]};
@@ -112,6 +103,7 @@ const searchButtonClicked = (form, previousResults) => {
   }
 
   if (form.item==="" && form.location==="") {
+
     const results = axios.post(`http://localhost:3001/donations/search/`)
     .then((e) => {
       const searchData = {geocode:[]};

@@ -1,4 +1,4 @@
-import { GoogleMap, useJsApiLoader,LoadScript } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, LoadScript, Marker } from '@react-google-maps/api';
 import React from "react";
 import mapStyles from "../../mapStyles";
 
@@ -12,7 +12,7 @@ const center = {
   lng: -79.3832
 };
 
-const AddNewMap = () => {
+const AddNewMap = (props) => {
 
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-script',
@@ -20,6 +20,17 @@ const AddNewMap = () => {
   })
 
   const [map, setMap] = React.useState(null)
+
+  const onMapClick = React.useCallback((e) => {
+    props.setMarkers((current) => [
+      ...current,
+      {
+        lat: e.latLng.lat(),
+        lng: e.latLng.lng(),
+        time: new Date(),
+      },
+    ]);
+  }, []);
 
   const onLoad = React.useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds(center);
@@ -37,7 +48,6 @@ const AddNewMap = () => {
     zoomControl: true,
   }
 
-
   return isLoaded ?(
       <GoogleMap
         mapContainerStyle={containerStyle}
@@ -46,8 +56,19 @@ const AddNewMap = () => {
         // onLoad={onLoad}
         onUnmount={onUnmount}
         options={options}
+        onClick={(e) => props.onClick(e)}
       >
         { /* Child components, such as markers, info windows, etc. */ }
+        <Marker 
+          position={props.marker} 
+          icon=
+            {{
+            url: "../../images/location-dot-solid.svg",
+            origin: new window.google.maps.Point(0, 0),
+            anchor: new window.google.maps.Point(25, 25),
+            scaledSize: new window.google.maps.Size(50, 50)
+            }}
+          />
         <></>
       </GoogleMap>    
   ) : <></>

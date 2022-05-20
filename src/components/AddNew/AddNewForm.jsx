@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme';
 import { Typography, TextField, FormControl, InputLabel, Select, MenuItem, Button} from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from "axios";
 import getGeocode from '../../helpers/getGeoCode';
 
@@ -13,7 +13,7 @@ const AddNewForm = (props) => {
     name: null,
     latitude: null,
     longitude: null,
-    location: null,
+    location: props.location.address ? props.location.address : null,
     condition: null,
     description: null,
     image: null
@@ -39,29 +39,8 @@ const AddNewForm = (props) => {
         console.log("Form sent to database:", updatedForm)})
       .catch((error) => console.log(`Error sending form to db. Error: ${error}`))
 
-      // console.log("Form populated successfully!")
-
-      // do {
-      //   console.log("Waiting")
-      // } while (!form.lng && form.lat && form.image)
-
-      // axios.post("http://localhost:3001/add-donation", form)
-      // console.log("Form sent to database:", form)
-
-      // axios.post("http://localhost:3001/add-donation", form)
-      // console.log("Form successfully sent to database:", form)
-      
     }).catch((error) => console.log(`Error loading form data. Error: ${error}`))
 
-    // const populateForm = (all) => {
-    //   setForm(prev => ({...prev, image: all[0].data.url, latitude: all[1][0], longitude: all[1][1]}))
-
-    //   while (form.lng === null || form.lat === null || form.image === null) {
-    //     console.log("Waiting");
-    //   }
-
-    //   return;
-    // }
     
   };
 
@@ -75,6 +54,16 @@ const AddNewForm = (props) => {
     return formData
   };
 
+  useEffect(() => {
+
+    setForm(prev => ({...prev, location: `${props.location.address} `}))
+
+  }, [props.location.address]);
+
+  const setValue = () => {
+    return form.location;
+  }
+
   return(
     <div className="form-container">
       <ThemeProvider theme={theme}>
@@ -83,7 +72,7 @@ const AddNewForm = (props) => {
         <form id="add-new-form"  autocomplete="off">
           <TextField id="outlined-basic" label="Title" variant="outlined" onChange={(e) => setForm(prev => ({...prev, name: e.target.value}))}/>
           <div className='search-container'>
-            <TextField id="outlined-basic" label="Location" variant="outlined" sx={{width: "100%"}} onChange={(e) => setForm(prev => ({...prev, location: e.target.value}))}/>
+            <TextField id="outlined-basic" label="Location" variant="outlined" sx={{width: "100%"}} value={setValue()} onChange={(e) => setForm(prev => ({...prev, location: e.target.value}))}/>
             <button id="address-button" ><i class="fa-solid fa-magnifying-glass fa-xl"></i></button>
             <Typography variant="helper" sx={{mt: -5}}>Please input an address <b>OR</b> adjust the pin on the map to generate a location</Typography>
           </div>
