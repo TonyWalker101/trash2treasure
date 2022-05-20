@@ -7,7 +7,7 @@ import DetailsModal from "../components/SearchResult/DetailsModal";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CongratsModal from "../components/SearchResult/ComgratsModal";
-import { getThemeProps } from "@mui/system";
+import Empty from "../components/SearchResult/Empty";
 
 
 const SearchResult = (props) => {
@@ -32,18 +32,23 @@ const SearchResult = (props) => {
   }
 
   useEffect(() => {
+    if(props.indexSearch.location!==""||props.indexSearch.item!==""){
+      return
+    }
     Promise.all([
       axios.get("http://localhost:3001/"),
       axios.get("http://localhost:3001/comments"), 
       axios.get("http://localhost:3001/users")
     ])
     .then((all) => setResults(
-      prev => ({...prev, listData:all[0].data,
+      prev => ({...prev, listData: all[0].data,
         comments:all[1].data, users: all[2].data
       })
     ))
     .catch((error) => console.log(`Error loading API data. Error: ${error}`));
   }, []);
+
+  // console.log(results.listData);
 
   return(
     <div>
@@ -51,10 +56,16 @@ const SearchResult = (props) => {
       <SearchHeader indexSearch={props.indexSearch} setIndexSearch={props.setIndexSearch} onChange={(data) => updateStateFromSearch(data)} resultState={results?.listData || []}/>
       <SearchResultMap listData={results?.listData || []} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected} center={results.center}/>
 
-      <ResultList listData={results?.listData || []} selected={selected} setModal={setModal}/>
+      {results.listData.length !== 0 ?
+        <ResultList listData={results?.listData || []} selected={selected} setModal={setModal}/>
+        :
+        <Empty />
+      }
+
       {congrats && 
         <CongratsModal congrats={congrats} setCongrats={setCongrats} setModal={setModal}/>
       }
+
       <DetailsModal listData={results?.listData || []} modal={modal} setModal={setModal} users={results.users} comments={results.comments} setResults={setResults} setCongrats={setCongrats} setSelected={setSelected}/>
       
     </div>

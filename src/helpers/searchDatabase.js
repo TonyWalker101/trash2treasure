@@ -68,7 +68,7 @@ const searchDBWithGeocode = (geocode) => {
 const searchButtonClicked = (form, previousResults) => {
 
   // handles location search
-  if (form.location) {
+  if (form.location!=="") {
 
     const results = getGeocode(form.location)
     .then(results => {
@@ -87,7 +87,7 @@ const searchButtonClicked = (form, previousResults) => {
   }
 
   // handles item search
-  if (form.item) {
+  if (form.item!=="") {
 
     // const results = searchDB(previousResults, form.item);
     const results = axios.post(`http://localhost:3001/donations/search/`, `name=${form.item}`)
@@ -111,7 +111,7 @@ const searchButtonClicked = (form, previousResults) => {
     return results;
   }
 
-  if (!form.item && !form.location) {
+  if (form.item==="" && form.location==="") {
     const results = axios.post(`http://localhost:3001/donations/search/`)
     .then((e) => {
       const searchData = {geocode:[]};

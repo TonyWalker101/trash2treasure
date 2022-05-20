@@ -225,3 +225,34 @@
   width: 50vw;
   height: auto;
 }
+
+/* Empty */
+#empty-container {
+  width: 50vw;
+  height: 91vh; 
+  position: absolute;
+  top: 86px;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
+#empty_img {
+  width: 20vw;
+  height: auto;
+  margin-top: 15vh;
+}
+
+.empty-title-container {
+  margin-top: 70px;
+}
+
+.empty-title {
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 50px;
+  color: #4D318B;
+  margin-top: -70px;
+  text-align: center;
+}
