@@ -1,13 +1,20 @@
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme';
 import { Typography, TextField, FormControl, InputLabel, Select, MenuItem, Button} from '@mui/material';
-import { useState, useEffect } from 'react';
-import axios from "axios";
 import getGeocode from '../../helpers/getGeoCode';
+import { BrowserRouter as Router, Routes, Route, Switch, Link, Redirect, useHistory } from "react-router-dom"
+
 
 const AddNewForm = (props) => {
+  // const history = useHistory();
+  // console.log("## history", history);
+  // stores file uploaded in form
 
   const [selectedFile, setSelectedFile] = useState(null);
+
+  // stores value provided by user in form
 
   const [form, setForm] = useState({
     name: null,
@@ -18,11 +25,13 @@ const AddNewForm = (props) => {
     description: null,
     image: null
   })
+
+  const test = {state: null}
   
   const onFormSubmit = () => {
   
     // setSelectedFile({ selectedFile: event.target.files[0] });
-    const uploadImage = "https://api.cloudinary.com/v1_1/djv3yhbok/image/upload"
+    const uploadImage = "https://api.cloudinary.com/v1_1/djv3yhbok/image/upload";
     const formData = onFileUpload();
 
     Promise.all([
@@ -30,6 +39,7 @@ const AddNewForm = (props) => {
       getGeocode(form.location),
     ]).then((all) => {
       const updatedForm = {...form, image: all[0].data.url, latitude: all[1][0], longitude: all[1][1]}
+      test.state = {...form, image: all[0].data.url, latitude: all[1][0], longitude: all[1][1]}
 
       // populateForm(all)
       axios.post("http://localhost:3001/add-donation", updatedForm)
@@ -68,7 +78,12 @@ const AddNewForm = (props) => {
     <div className="form-container">
       <ThemeProvider theme={theme}>
         <Typography variant="title" id="add-new-title" sx={{mb: 5}}>Add A Treasure</Typography>
-
+        <Link to={{
+          pathname: "/search-result",
+          state: {
+            success:true
+          }
+        }}>Click me</Link>
         <form id="add-new-form">
           <TextField id="outlined-basic" label="Title" variant="outlined" onChange={(e) => setForm(prev => ({...prev, name: e.target.value}))}/>
           <div className='search-container'>
@@ -107,8 +122,21 @@ const AddNewForm = (props) => {
           </label></>
           <Typography variant="helper" sx={{mt: -3}}>Please upload a jpep, jpg or png file</Typography>
 
-
-          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" sx={{mt: 5, width: "100%"}} onClick={onFormSubmit}>Submit</Button>
+          <Link 
+            to={"/search-result"}
+            state={form}
+            // state={{
+            //   name: form.name,
+            //   latitude: form.latitude,
+            //   longitude: form.longitude,
+            //   location: form.location,
+            //   condition: form.condition,
+            //   description: form.description,
+            //   image: form.image
+            // }}
+          >
+            <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" sx={{mt: 5, width: "100%"}} onClick={onFormSubmit}>Submit</Button>
+          </Link>
         </form>
       </ThemeProvider>
     </div>
