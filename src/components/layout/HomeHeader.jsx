@@ -29,7 +29,6 @@ const HomeHeader = () => {
         </ThemeProvider>
       </nav>
     </header>
-    
   )
 }
 
