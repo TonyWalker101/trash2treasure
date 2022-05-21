@@ -19,7 +19,6 @@ const HomeHeader = (props) => {
   
   const handleSearch = () => {
     props.setLoading(true);
-
     setPlaceHolder({location:inputTextLocation.current.value,
     item: inputTextItem.current.value});
     const searchCriteria = placeHolder;
@@ -45,9 +44,12 @@ const HomeHeader = (props) => {
   }
   
   const onClear = () => {
-    inputTextLocation.current.value = "";
-    inputTextItem.current.value = "";
-    setPlaceHolder(prev=>({...prev,location:"",item:""}))
+    inputTextLocation.value = "";
+    // // inputTextLocation.onFocus = false;
+    inputTextItem.value = "";
+    // inputTextItem.onFocus = false;
+    setPlaceHolder(prev => ({...prev, location: "", item: ""}));
+    setSearch({location:"", item:""});
   }
   const inputTextLocation = useRef();
   const inputTextItem = useRef();
@@ -67,16 +69,16 @@ const HomeHeader = (props) => {
           
           <TextField id="filled-basic" label="Search by location" variant="filled" size="small" 
           inputRef={inputTextLocation}
-          defaultValue={placeHolder.location} 
+          value={placeHolder.location} 
           sx= {{width: "200px"}}
           InputProps={{ disableUnderline: true}} onChange={(event) => handleLocationInputChanged(event.target.value)}/>
           <div className="vl"></div>
 
           <TextField id="filled-basic" label="Search by item" variant="filled" size="small" 
           inputRef={inputTextItem}
-          defaultValue={placeHolder.item} InputProps={{ disableUnderline: true }} onChange={(event) => handleItemInputChanged(event.target.value)} />
+          value={placeHolder.item} InputProps={{ disableUnderline: true }} onChange={(event) => handleItemInputChanged(event.target.value)} />
 
-            <Button variant="contained" disableElevation color="primary" className="search-button" sx={{ borderRadius: 8 }} onClick={e => {e.preventDefault(); handleSearch();}} ><i className="fa-solid fa-magnifying-glass fa-xl"></i></Button>
+            <Button variant="contained" disableElevation color="primary" className="search-button" sx={{ borderRadius: 8 }} onClick={e => {e.preventDefault(); handleSearch(); props.setSelected(null);}} ><i className="fa-solid fa-magnifying-glass fa-xl"></i></Button>
             <button className="clear-button" onClick={onClear}><i class="fa-solid fa-xmark fa-xl"></i></button>
           </ThemeProvider>
         </form>

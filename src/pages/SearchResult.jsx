@@ -78,7 +78,7 @@ const SearchResult = (props) => {
   return(
     <div>
 
-      <SearchHeader setLoading={setLoading} indexSearch={props.indexSearch} setIndexSearch={props.setIndexSearch} onChange={(data) => updateStateFromSearch(data)} resultState={results?.listData || []}/>
+      <SearchHeader setSelected={setSelected} setLoading={setLoading} indexSearch={props.indexSearch} setIndexSearch={props.setIndexSearch} onChange={(data) => updateStateFromSearch(data)} resultState={results?.listData || []}/>
       <SearchResultMap listData={results?.listData || []} setMarkers={setMarkers} setSelected={setSelected} markers={markers} selected={selected} center={results.center}/>
 
       {loading && <Loading />}
