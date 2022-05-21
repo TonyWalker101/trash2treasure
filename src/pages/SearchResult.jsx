@@ -83,7 +83,7 @@ const SearchResult = (props) => {
 
       {loading && <Loading />}
       {results.listData.length !== 0 ?
-        <ResultList listData={results?.listData || []} selected={selected} setModal={setModal}/>
+        <ResultList listData={results?.listData || []} selected={selected} setModal={setModal} setSelected={setSelected} setResults={setResults}/>
         :
         <Empty />
       }

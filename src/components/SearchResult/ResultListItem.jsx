@@ -15,9 +15,26 @@ const ResultListItem = (props) => {
     } 
   }
 
+  const handleResultItemClick = () => {
+    
+    
+    props.setSelected({lat: Number(props.latitude), lng:Number(props.longitude), title: props.name, created_at: props.created_at, id: props.id });
+    
+    //quick jump to center or slow pan? ASK TEAM
+
+    props.setResults(prev => (
+      {...prev, 
+      center: {
+        lat: Number(props.latitude), 
+        lng: Number(props.longitude)}
+      }
+    ))
+
+  }
+
   return(
     <ThemeProvider theme={theme}>
-      <section className={selectedId(props.selected, props.order)? "item-card-selected" : "item-card"} id={`item-id-${props.order}`}>
+      <section className={selectedId(props.selected, props.order)? "item-card-selected" : "item-card"} id={`item-id-${props.order}`} onClick={handleResultItemClick}>
         <div className="image-crop">
           <img src={props.image} alt="treasure-photo" className="item-img"/>
         </div>
