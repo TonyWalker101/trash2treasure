@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme';
 import searchButtonClicked from '../../helpers/searchDatabase';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const HomeHeader = (props) => {
 
@@ -20,7 +20,8 @@ const HomeHeader = (props) => {
   const handleSearch = () => {
     props.setLoading(true);
 
-    setPlaceHolder(placeHolder);
+    setPlaceHolder({location:inputTextLocation.current.value,
+    item: inputTextItem.current.value});
     const searchCriteria = placeHolder;
 
     // async function - updates state in Search Results page
@@ -44,9 +45,12 @@ const HomeHeader = (props) => {
   }
   
   const onClear = () => {
-    setPlaceHolder({location: "",
-      item: ""})
+    inputTextLocation.current.value = "";
+    inputTextItem.current.value = "";
+    setPlaceHolder(prev=>({...prev,location:"",item:""}))
   }
+  const inputTextLocation = useRef();
+  const inputTextItem = useRef();
 
   return(
     <header>
@@ -58,15 +62,19 @@ const HomeHeader = (props) => {
         </ThemeProvider>
       </nav>
         
-        <form className="header-search-bar"  autoComplete="off">
+        <form className="header-search-bar"  autoComplete="off" onSubmit={e => e.preventDefault()}>
           <ThemeProvider theme={theme}>
           
-          <TextField id="filled-basic" label="Search by location" variant="filled" size="small" defaultValue={placeHolder.location} 
+          <TextField id="filled-basic" label="Search by location" variant="filled" size="small" 
+          inputRef={inputTextLocation}
+          defaultValue={placeHolder.location} 
           sx= {{width: "200px"}}
           InputProps={{ disableUnderline: true}} onChange={(event) => handleLocationInputChanged(event.target.value)}/>
           <div className="vl"></div>
 
-          <TextField id="filled-basic" label="Search by item" variant="filled" size="small" defaultValue={placeHolder.item} InputProps={{ disableUnderline: true }} onChange={(event) => handleItemInputChanged(event.target.value)} />
+          <TextField id="filled-basic" label="Search by item" variant="filled" size="small" 
+          inputRef={inputTextItem}
+          defaultValue={placeHolder.item} InputProps={{ disableUnderline: true }} onChange={(event) => handleItemInputChanged(event.target.value)} />
 
             <Button variant="contained" disableElevation color="primary" className="search-button" sx={{ borderRadius: 8 }} onClick={e => {e.preventDefault(); handleSearch();}} ><i className="fa-solid fa-magnifying-glass fa-xl"></i></Button>
             <button className="clear-button" onClick={onClear}><i class="fa-solid fa-xmark fa-xl"></i></button>
