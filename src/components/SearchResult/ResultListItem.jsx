@@ -22,13 +22,13 @@ const ResultListItem = (props) => {
     
     //quick jump to center or slow pan? ASK TEAM
 
-    props.setResults(prev => (
-      {...prev, 
-      center: {
-        lat: Number(props.latitude), 
-        lng: Number(props.longitude)}
-      }
-    ))
+    // props.setResults(prev => (
+    //   {...prev, 
+    //   center: {
+    //     lat: Number(props.latitude), 
+    //     lng: Number(props.longitude)}
+    //   }
+    // ))
 
   }
 
