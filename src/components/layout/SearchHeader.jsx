@@ -20,16 +20,19 @@ const HomeHeader = (props) => {
   const handleSearch = () => {
     props.setLoading(true);
 
-    setSearch(placeHolder);
-    // async function - updates state in Search Results page
+    setPlaceHolder(placeHolder);
+    const searchCriteria = placeHolder;
 
-    searchButtonClicked(search).then((data) => {
+    // async function - updates state in Search Results page
+    searchButtonClicked(searchCriteria).then((data) => {
       props.onChange(data);
       // props.setFilteredListData(data);
     });
   }
   
+  //handles search from /index page
   useEffect(()=>{handleSearch()},[search]);
+
   // handles location text in Search bar
   const handleLocationInputChanged = e => {
     setPlaceHolder(prev => ({...prev, location: e}));
