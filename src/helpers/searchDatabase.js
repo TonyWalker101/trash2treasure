@@ -1,6 +1,13 @@
 import axios from "axios";
 import getGeocode from "../helpers/getGeoCode"
 
+// returned if API fails to find anything
+
+const apiSearchFailure = {
+  geocode: [43.6532, -79.3832],
+  results : []
+}
+
 // Search button
 
 const searchButtonClicked = (form) => {
@@ -29,11 +36,7 @@ const searchButtonClicked = (form) => {
 
     }).catch((error) => {
       console.log("Error occured in item search! But was caught ;)", error)
-      const results = {
-        geocode: [43.6532, -79.3832],
-        results : null
-      }
-      return results;
+      return apiSearchFailure;
     })
     
     return results;
@@ -55,11 +58,7 @@ const searchButtonClicked = (form) => {
 
     }).catch((error) => {
       console.log("Error occured in item search! But was caught ;)", error)
-      const results = {
-        geocode: [43.6532, -79.3832],
-        results : null
-      }
-      return results;
+      return apiSearchFailure;
     })
     
     return results;
@@ -81,11 +80,7 @@ const searchButtonClicked = (form) => {
       return searchData;
     }).catch((error) => {
       console.log("Error occured in item search! But was caught ;)", error)
-      const results = {
-        geocode: [43.6532, -79.3832],
-        results : null
-      }
-      return results;
+      return apiSearchFailure;
     })
 
     return results;
@@ -99,11 +94,7 @@ const searchButtonClicked = (form) => {
       return searchData;
     }).catch((error) => {
       console.log("Error occured in empty item search! But was caught ;) ", error)
-      const results = {
-        geocode: [43.6532, -79.3832],
-        results : null
-      }
-      return results;
+      return apiSearchFailure;
     })
 
     return results;
