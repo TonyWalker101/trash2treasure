@@ -58,7 +58,7 @@ const SearchResult = (props) => {
       if (location.state) {
         const newItem = findNewItem(location.state, all[0].data)
 
-         //resets location.state
+          //resets location.state
         navigate(location.state, {});
 
         return setResults(
@@ -66,9 +66,9 @@ const SearchResult = (props) => {
             comments:all[1].data, users: all[2].data, center: {lat: newItem[0].latitude*1, lng: newItem[0].longitude*1}
           }))
       } else {
-      return setResults(
-      prev => ({...prev, listData: all[0].data,
-        comments:all[1].data, users: all[2].data
+        return setResults(
+        prev => ({...prev, listData: all[0].data,
+          comments:all[1].data, users: all[2].data
         }))
       }
     })
