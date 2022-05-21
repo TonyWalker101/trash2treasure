@@ -4,18 +4,17 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme';
 import { Typography, TextField, FormControl, InputLabel, Select, MenuItem, Button} from '@mui/material';
 import getGeocode from '../../helpers/getGeoCode';
-import { BrowserRouter as Router, Routes, Route, Switch, Link, Redirect, useHistory } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Switch, Link, Redirect, useNavigate } from "react-router-dom"
 
 
 const AddNewForm = (props) => {
-  // const history = useHistory();
-  // console.log("## history", history);
-  // stores file uploaded in form
 
+  const navigate = useNavigate();
+
+  // stores file uploaded by user from File System
   const [selectedFile, setSelectedFile] = useState(null);
 
-  // stores value provided by user in form
-
+  // stores value provided by user in /add-new page
   const [form, setForm] = useState({
     name: null,
     latitude: null,
@@ -25,12 +24,10 @@ const AddNewForm = (props) => {
     description: null,
     image: null
   })
-
-  const test = {state: null}
   
+  // function runs when Submit button on /add-new page is clicked
   const onFormSubmit = () => {
   
-    // setSelectedFile({ selectedFile: event.target.files[0] });
     const uploadImage = "https://api.cloudinary.com/v1_1/djv3yhbok/image/upload";
     const formData = onFileUpload();
 
@@ -38,22 +35,27 @@ const AddNewForm = (props) => {
       axios.post(uploadImage, formData),
       getGeocode(form.location),
     ]).then((all) => {
+      // creates a synchronous version of form state to send to database
       const updatedForm = {...form, image: all[0].data.url, latitude: all[1][0], longitude: all[1][1]}
-      test.state = {...form, image: all[0].data.url, latitude: all[1][0], longitude: all[1][1]}
-
-      // populateForm(all)
       axios.post("http://localhost:3001/add-donation", updatedForm)
-      
       .then(() => {
-        setForm(prev => ({...prev, image: all[0].data.url, latitude: all[1][0], longitude: all[1][1]}))
-        console.log("Form sent to database:", updatedForm)})
+        setForm(prev => {
+          // creates a synchronous version of form state to send to /search-result page
+          const newForm = {...prev, image: all[0].data.url, latitude: all[1][0], longitude: all[1][1]}
+
+          // navigates to /search-result and passes form state
+          navigate("/search-result", { replace: true, state: newForm });
+
+          return newForm
+          })
+        })
       .catch((error) => console.log(`Error sending form to db. Error: ${error}`))
 
     }).catch((error) => console.log(`Error loading form data. Error: ${error}`))
 
-    
   };
 
+  // prepares file uploaded by user to be sent to API
   const onFileUpload = () => {
     
     const formData = new FormData();
@@ -64,11 +66,13 @@ const AddNewForm = (props) => {
     return formData
   };
 
+  // updates location section of form when map is clicked
   useEffect(() => {
 
     setForm(prev => ({...prev, location: `${props.location.address} `}))
 
   }, [props.location.address]);
+
 
   const setValue = () => {
     return form.location;
@@ -78,12 +82,6 @@ const AddNewForm = (props) => {
     <div className="form-container">
       <ThemeProvider theme={theme}>
         <Typography variant="title" id="add-new-title" sx={{mb: 5}}>Add A Treasure</Typography>
-        <Link to={{
-          pathname: "/search-result",
-          state: {
-            success:true
-          }
-        }}>Click me</Link>
         <form id="add-new-form">
           <TextField id="outlined-basic" label="Title" variant="outlined" onChange={(e) => setForm(prev => ({...prev, name: e.target.value}))}/>
           <div className='search-container'>
@@ -121,22 +119,7 @@ const AddNewForm = (props) => {
           <Button variant="contained" component="span" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary">Upload An Image</Button>
           </label></>
           <Typography variant="helper" sx={{mt: -3}}>Please upload a jpep, jpg or png file</Typography>
-
-          <Link 
-            to={"/search-result"}
-            state={form}
-            // state={{
-            //   name: form.name,
-            //   latitude: form.latitude,
-            //   longitude: form.longitude,
-            //   location: form.location,
-            //   condition: form.condition,
-            //   description: form.description,
-            //   image: form.image
-            // }}
-          >
-            <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" sx={{mt: 5, width: "100%"}} onClick={onFormSubmit}>Submit</Button>
-          </Link>
+          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" sx={{mt: 5, width: "100%"}} onClick={onFormSubmit}>Submit</Button>
         </form>
       </ThemeProvider>
     </div>
