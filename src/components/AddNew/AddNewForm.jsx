@@ -19,7 +19,7 @@ const AddNewForm = (props) => {
     name: null,
     latitude: null,
     longitude: null,
-    location: props.location.address ? props.location.address : null,
+    location: props.location.address ? props.location.address : "",
     condition: null,
     description: null,
     image: null
@@ -69,7 +69,7 @@ const AddNewForm = (props) => {
   // updates location section of form when map is clicked
   useEffect(() => {
 
-    setForm(prev => ({...prev, location: `${props.location.address} `}))
+    setForm(prev => ({...prev, location: props.location.address}))
 
   }, [props.location.address]);
 
