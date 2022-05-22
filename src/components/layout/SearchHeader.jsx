@@ -50,6 +50,7 @@ const HomeHeader = (props) => {
     // inputTextItem.onFocus = false;
     setPlaceHolder(prev => ({...prev, location: "", item: ""}));
     setSearch({location:"", item:""});
+    props.setSelected(null);
   }
   const inputTextLocation = useRef();
   const inputTextItem = useRef();
