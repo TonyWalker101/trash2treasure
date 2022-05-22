@@ -47,12 +47,6 @@
   flex-direction: column;
 }
 
-#button-name-group {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
 #img-name {
   margin-left: 10px;
   font-family: Poppins;

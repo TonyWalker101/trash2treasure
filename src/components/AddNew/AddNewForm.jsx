@@ -120,9 +120,9 @@ const AddNewForm = (props) => {
           <label htmlFor="select-image">
           <Button variant="contained" component="span" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary">Upload An Image</Button>
           </label></>
-          <p id="img-name">{selectedFile?selectedFile.name:""}</p>
+          {/* <p id="img-name">{selectedFile?selectedFile.name:""}</p> */}
           </div>
-          <Typography variant="helper" >Please upload a jpep, jpg or png file</Typography>
+          <Typography variant="helper"> {selectedFile? <span id="img-name">{selectedFile.name}</span>:"Please upload a jpep, jpg or png file"} </Typography>
           </div>
 
           <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" sx={{mt: 5, width: "100%"}} onClick={onFormSubmit}>Submit</Button>
