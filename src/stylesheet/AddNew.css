@@ -41,3 +41,23 @@
   margin-top: 15px;
   margin-left: -40px;
 }
+
+#add-new-button-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#button-name-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#img-name {
+  margin-left: 10px;
+  font-family: Poppins;
+  font-weight: 600;
+  color: #87cdd1;
+  width: 300px;
+  line-height: 1em;
+}
