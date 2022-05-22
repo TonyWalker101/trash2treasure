@@ -113,14 +113,17 @@ const AddNewForm = (props) => {
             minRows={4}
             onChange={(e) => setForm(prev => ({...prev, description: e.target.value}))}
             />
-
+          <div id="add-new-button-container">
+            <div id="button-name-group">
           <>
           <input accept="image/*" type="file" id="select-image" style={{ display: 'none' }} onChange={(event) => setSelectedFile(event.target.files[0])}/>
           <label htmlFor="select-image">
           <Button variant="contained" component="span" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary">Upload An Image</Button>
           </label></>
-          <Typography variant="helper" sx={{mt: -3}}>Please upload a jpep, jpg or png file</Typography>
-
+          <p id="img-name">{selectedFile?selectedFile.name:""}</p>
+          </div>
+          <Typography variant="helper" >Please upload a jpep, jpg or png file</Typography>
+          </div>
 
           <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="button-group" color="primary" sx={{mt: 5, width: "100%"}} onClick={onFormSubmit}>Submit</Button>
         </form>
