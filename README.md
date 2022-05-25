@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# Trash2Treasure - Front-End - version 1.0.0
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Front-end app of the final project for the Lighthouse Labs Web Development Program created by [Siyi Xie](https://github.com/isissi), [Tony Walker](https://github.com/TonyWalker101) and [Marcos Spomberg](https://github.com/spomberg).
 
-## Available Scripts
+## Trash2Trasure
+Trash2Treasure is a platform for users to list items (treasures) that are being left for donation in public spaces. It realies heavily on geolocation and the Google Maps API. Users are able to add and claims donations/trasures, comment on each donation and search by location and item name.
 
-In the project directory, you can run:
+To be used in conjunction with the [back-end app](https://github.com/TonyWalker101/trash2treasure-api).
 
-### `npm start`
+Created with React 18.1.0
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## System dependencies
+- Emotion/React
+- Emotion/Styled
+- MUI/Material UI
+- Google Maps API
+- Axios
+- React Time Ago
+- React Geocode
+- React Router
+- Web Vitals
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Screenshots
+![Index page](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/index1.jpeg?raw=true "Index page")
 
-### `npm test`
+![Search results](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/search-results1.png?raw=true "Search results")
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Donation page](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/donation-page.png?raw=true "Donation page")
 
-### `npm run build`
+![Claim donation page](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/claim-treasure.png?raw=true "Claim donation page")
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## [API](https://github.com/TonyWalker101/trash2treasure-api) Setup
+1. cd into the directory 
+2. Run `bundle install` to install required gems
+3. Rename `config/local_env.example.yml` as `config/local_env.yml` and add a valid Google Maps API key string.
+4. Run `rails db:setup` to create the database, load the schema and initialize the seed data.
+5. Run `rails start` to start the API.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Frontend Setup
+1. cd into the directory 
+2. Run `npm install` to install the dependencies.
+3. Rename .env.development.example.local to .env.development.local and add a valid Google Maps API key string.
+4. Run `npm start`
