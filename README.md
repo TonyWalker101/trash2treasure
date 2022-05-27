@@ -22,12 +22,16 @@ Created with React 18.1.0
 
 ## Gif Screenshots
 ![Index page](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/index.gif?raw=true "Index page")
+Index Page
 
 ![Search results](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/sesarch.gif?raw=true "Search results")
+Search Results
 
 ![Donation page](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/add-new.gif?raw=true "Donation page")
+Add New Treasure Page
 
 ![Claim donation page](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/claim.gif?raw=true "Claim donation page")
+Claim Treasure Page
 
 
 ## [API](https://github.com/TonyWalker101/trash2treasure-api) Setup
