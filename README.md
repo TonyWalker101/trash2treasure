@@ -20,14 +20,14 @@ Created with React 18.1.0
 - React Router
 - Web Vitals
 
-## Screenshots
-![Index page](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/index1.jpeg?raw=true "Index page")
+## Gif Screenshots
+![Index page](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/index.gif?raw=true "Index page")
 
-![Search results](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/search-results1.png?raw=true "Search results")
+![Search results](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/sesarch.gif?raw=true "Search results")
 
-![Donation page](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/donation-page.png?raw=true "Donation page")
+![Donation page](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/add-new.gif?raw=true "Donation page")
 
-![Claim donation page](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/claim-treasure.png?raw=true "Claim donation page")
+![Claim donation page](https://github.com/TonyWalker101/trash2treasure/blob/master/public/images/claim.gif?raw=true "Claim donation page")
 
 
 ## [API](https://github.com/TonyWalker101/trash2treasure-api) Setup
