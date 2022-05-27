@@ -14,6 +14,8 @@ const DetailsModal = (props) => {
   const [comment, setComment] = useState({comment: '', donation_id: null});
   const [submitError, setSubmitError] = useState(false);
 
+console.log("props users "+props.users);
+
   const textInput = React.useRef(null);
 
 
@@ -27,6 +29,7 @@ const DetailsModal = (props) => {
   }
 
   const userName = getUserNameByItemId(props.users, props.listData, props.modal)
+  // console.log(props.users);
 
   const comments = getCommentsByItemId(props.comments, props.modal);
 
@@ -109,7 +112,7 @@ const DetailsModal = (props) => {
                         <div className="confirm-button-group">
                           <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="primary" onClick={() => setClaim(null)}>Cancel</Button>
         
-                          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="secondary" onClick={() => { props.setModal(null); props.setCongrats(true); onConfirm(); props.setSelected(null);
+                          <Button variant="contained" fontWeight="fontWeightRegular" disableElevation className="confirm-button" color="secondary" onClick={() => { props.setModal(null); props.setCongrats(true); onConfirm(); props.setSelected(null); setClaim(null);
                           }}>Confirm</Button>
                         </div>
                     </div>
