@@ -42,30 +42,33 @@ const SearchResult = (props) => {
   }, 1000)
 
   useEffect(() => {
+
     //show loading page for 1s
     clearTimeout(timeId)
 
-    if(props.indexSearch.location!==""||props.indexSearch.item!==""){
-      return
-    }
-
+    // if(props.indexSearch.location==="" && props.indexSearch.item===""){
+    //   return
+    // }
     Promise.all([
       axios.get("http://localhost:3001/"),
       axios.get("http://localhost:3001/comments"), 
       axios.get("http://localhost:3001/users")
+      
     ])
     .then((all) => {
+
+      console.log("here"+all[2].data);
       if (location.state) {
         const newItem = findNewItem(location.state, all[0].data)
 
           //resets location.state
         navigate(location.state, {});
-
         return setResults(
           prev => ({...prev, listData: newItem,
             comments:all[1].data, users: all[2].data, center: {lat: newItem[0].latitude*1, lng: newItem[0].longitude*1}
           }))
       } else {
+
         return setResults(
         prev => ({...prev, listData: all[0].data,
           comments:all[1].data, users: all[2].data
@@ -74,6 +77,8 @@ const SearchResult = (props) => {
     })
     .catch((error) => console.log(`Error loading API data. Error: ${error}`))
   }, [])
+
+
 
   return(
     <div>
